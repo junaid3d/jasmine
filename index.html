@@ -249,7 +249,7 @@
 
     .section {
       position: relative;
-      padding: 104px 0;
+      padding: 60px 0;
     }
 
     .hero {
@@ -305,7 +305,7 @@
     .brand-hero-title {
       max-width: 820px;
       font-size: clamp(5rem, 12vw, 11.4rem);
-      line-height: 0.82;
+      line-height: 0.93;
       letter-spacing: 0;
       color: var(--olive);
       text-shadow: 0 2px 28px rgba(255, 253, 246, 0.64);
@@ -450,23 +450,11 @@
       transform: rotate(-35deg);
     }
 
-    .hero-intro {
-      padding-top: 92px;
+    .about-copy .hero-copy {
+      margin-top: 0;
     }
 
-    .hero-intro-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.72fr);
-      gap: clamp(34px, 6vw, 80px);
-      align-items: center;
-    }
-
-    .hero-intro-copy h1 {
-      max-width: 820px;
-      font-size: clamp(3.15rem, 7vw, 6.7rem);
-    }
-
-    .hero-card {
+    .approach-card {
       position: relative;
       padding: 38px;
       border: 1px solid var(--line);
@@ -477,7 +465,7 @@
       overflow: hidden;
     }
 
-    .hero-card::before {
+    .approach-card::before {
       content: "";
       position: absolute;
       top: -60px;
@@ -493,23 +481,21 @@
       z-index: 0;
     }
 
-    .hero-card > * {
+    .approach-card > * {
       position: relative;
       z-index: 1;
     }
 
-    .hero-card .quote {
-      margin-top: 24px;
-      padding-top: 24px;
-      border-top: 1px solid var(--line);
+    .approach-card .quote {
+      margin-top: 0px;
       color: var(--olive);
       font-family: var(--serif);
-      font-size: clamp(1.9rem, 3vw, 2.55rem);
-      font-weight: 600;
-      line-height: 1.12;
+      font-size: clamp(1rem, 2.55vw, 2.14rem);
+      font-weight: 100;
+      line-height: 1.1;
     }
 
-    .hero-card-list {
+    .approach-card-list {
       display: grid;
       gap: 12px;
       margin: 24px 0 0;
@@ -517,16 +503,16 @@
       list-style: none;
     }
 
-    .hero-card-list li {
+    .approach-card-list li {
       display: flex;
       align-items: flex-start;
       gap: 11px;
       color: var(--olive-soft);
       font-weight: 700;
-      line-height: 1.45;
+      line-height: 1.42;
     }
 
-    .hero-card-list li::before {
+    .approach-card-list li::before {
       content: "";
       flex: 0 0 auto;
       width: 13px;
@@ -606,7 +592,7 @@
 
     .cards-grid {
       display: grid;
-      grid-template-columns: 1.12fr 0.88fr 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 18px;
     }
 
@@ -639,21 +625,7 @@
     }
 
     .cards-grid .card {
-      min-height: 260px;
-    }
-
-    .cards-grid .card:first-child {
-      grid-row: span 2;
-      min-height: 100%;
-      background: linear-gradient(160deg, rgba(255, 253, 246, 0.86), rgba(220, 229, 207, 0.48));
-    }
-
-    .cards-grid .card:first-child h3 {
-      font-size: clamp(1.85rem, 3vw, 2.65rem);
-    }
-
-    .cards-grid .card:nth-child(4) {
-      grid-column: span 2;
+      min-height: 238px;
     }
 
     .card p {
@@ -676,9 +648,9 @@
 
     .approach-grid {
       display: grid;
-      grid-template-columns: minmax(0, 0.92fr) minmax(220px, 0.38fr);
-      gap: 30px;
-      align-items: stretch;
+      grid-template-columns: minmax(0, 1.9fr) minmax(390px, 0.9fr);
+      gap: clamp(28px, 4vw, 44px);
+      align-items: start;
     }
 
     .approach-text {
@@ -1070,6 +1042,81 @@
       background: rgba(220, 229, 207, 0.7);
     }
 
+    .floating-whatsapp {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 20;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 58px;
+      height: 58px;
+      border: 1px solid rgba(44, 56, 38, 0.12);
+      border-radius: 50%;
+      background: var(--olive);
+      color: var(--jasmine);
+      box-shadow: 0 18px 44px rgba(44, 56, 38, 0.24);
+      transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 220ms ease, background 220ms ease;
+    }
+
+    .floating-whatsapp:hover,
+    .floating-whatsapp:focus {
+      transform: translateY(-3px);
+      background: #3a482f;
+      box-shadow: 0 24px 54px rgba(44, 56, 38, 0.3);
+    }
+
+    .floating-whatsapp:active {
+      transform: translateY(-1px) scale(0.98);
+    }
+
+    .floating-whatsapp svg {
+      width: 29px;
+      height: 29px;
+      fill: currentColor;
+    }
+
+    .floating-top {
+      position: fixed;
+      right: 22px;
+      bottom: 92px;
+      z-index: 20;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border: 1px solid rgba(44, 56, 38, 0.12);
+      border-radius: 50%;
+      background: rgba(255, 253, 246, 0.88);
+      color: var(--olive);
+      box-shadow: 0 16px 38px rgba(44, 56, 38, 0.16);
+      backdrop-filter: blur(14px);
+      transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 220ms ease, background 220ms ease;
+    }
+
+    .floating-top:hover,
+    .floating-top:focus {
+      transform: translateY(-3px);
+      background: var(--jasmine);
+      box-shadow: 0 22px 48px rgba(44, 56, 38, 0.22);
+    }
+
+    .floating-top:active {
+      transform: translateY(-1px) scale(0.98);
+    }
+
+    .floating-top svg {
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 2.25;
+    }
+
     .footer {
       padding: 44px 0;
       border-top: 1px solid var(--line);
@@ -1106,17 +1153,6 @@
         grid-template-columns: repeat(2, 1fr);
       }
 
-      .cards-grid .card:first-child {
-        grid-row: auto;
-      }
-
-      .cards-grid .card:nth-child(4) {
-        grid-column: auto;
-      }
-
-      .cards-grid .card:last-child {
-        grid-column: 1 / -1;
-      }
     }
 
     @media (max-width: 860px) {
@@ -1190,7 +1226,6 @@
       }
 
       .hero-grid,
-      .hero-intro-grid,
       .section-head,
       .about-panel,
       .approach-grid,
@@ -1201,14 +1236,14 @@
 
       .hero {
         min-height: 78dvh;
-        padding: 96px 0 74px;
+        padding: 96px 0 3px;
         background:
           linear-gradient(90deg, rgba(246, 239, 226, 0.96) 0%, rgba(246, 239, 226, 0.82) 44%, rgba(246, 239, 226, 0.2) 100%),
           linear-gradient(180deg, rgba(44, 56, 38, 0.04), rgba(44, 56, 38, 0.14)),
           url("img/header.jpg") 62% center / cover no-repeat;
       }
 
-      .hero-card::before {
+      .approach-card::before {
         right: -26px;
       }
 
@@ -1232,6 +1267,7 @@
 
       .brand-hero-title {
         font-size: clamp(4.35rem, 21vw, 7rem);
+        line-height: 0.98;
       }
 
       .hero-tagline {
@@ -1260,11 +1296,7 @@
         grid-template-columns: 1fr;
       }
 
-      .cards-grid .card:last-child {
-        grid-column: auto;
-      }
-
-      .hero-card,
+      .approach-card,
       .card,
       .age-card,
       .project-card,
@@ -1276,6 +1308,36 @@
       .form-wrap {
         padding: 14px;
         border-radius: 24px;
+      }
+
+      .floating-whatsapp {
+        right: 16px;
+        bottom: 16px;
+        width: 54px;
+        height: 54px;
+      }
+
+      .floating-top {
+        right: 19px;
+        bottom: 84px;
+        width: 48px;
+        height: 48px;
+      }
+
+      .approach-card .quote {
+        font-size: clamp(1.65rem, 8vw, 2.35rem);
+        font-weight: 500;
+        line-height: 1.08;
+      }
+
+      .approach-card-list {
+        gap: 10px;
+        margin-top: 22px;
+      }
+
+      .approach-card-list li {
+        font-size: 0.94rem;
+        line-height: 1.38;
       }
 
     }
@@ -1317,31 +1379,6 @@
         </div>
       </section>
 
-      <section class="section hero-intro" aria-label="Jasmine Learning introduction">
-        <div class="container hero-intro-grid">
-          <div class="hero-intro-copy">
-            <p class="eyebrow">Holistic. Constructivist. Community-based.</p>
-            <h1>A calm, curious learning studio for children.</h1>
-            <p class="hero-copy">Jasmine Learning is a warm, project-based learning space for children aged 3 to 12. Through Socratic discussions, hands-on projects, creative expression, and real-world challenges, children grow with curiosity, kindness, and purpose.</p>
-            <div class="hero-note" aria-label="Jasmine Learning quick details">
-              <span>Ages 3 to 12</span>
-              <span>Community studio</span>
-              <span>Project-based journeys</span>
-            </div>
-          </div>
-          <aside class="hero-card" aria-label="Jasmine Learning highlights">
-            <p class="eyebrow">A calm learning studio</p>
-            <h2>Grow gently. Think deeply. Create bravely.</h2>
-            <p class="quote">A slower, kinder space where children feel safe, seen, and inspired.</p>
-            <ul class="hero-card-list">
-              <li>Socratic discussions that help children listen, reason, and speak with care.</li>
-              <li>Hands-on missions that turn ideas into visible work.</li>
-              <li>A community rhythm built around confidence, kindness, and reflection.</li>
-            </ul>
-          </aside>
-        </div>
-      </section>
-
       <section class="section" id="about">
         <div class="container">
           <div class="section-head">
@@ -1352,9 +1389,15 @@
             <p>In today's world, children need more than worksheets, memorisation, and pressure-driven learning. They need spaces where they can ask questions, work with their hands, express themselves, and learn at a natural pace.</p>
           </div>
           <div class="panel about-panel">
-            <div>
+            <div class="about-copy">
+              <p class="hero-copy">Jasmine Learning is a warm, project-based learning space for children aged 3 to 12. Through Socratic discussions, hands-on projects, creative expression, and real-world challenges, children grow with curiosity, kindness, and purpose.</p>
               <p>At Jasmine Learning, children learn through thoughtful questions, meaningful projects, hands-on discovery, and gentle guidance.</p>
               <p>Our goal is simple: to make quality holistic and constructivist education accessible to more families at a reasonable price.</p>
+              <div class="hero-note" aria-label="Jasmine Learning quick details">
+                <span>Ages 3 to 12</span>
+                <span>Community studio</span>
+                <span>Project-based journeys</span>
+              </div>
             </div>
             <ul class="soft-list" aria-label="Jasmine Learning values">
               <li>Think deeply</li>
@@ -1394,13 +1437,8 @@
             </article>
             <article class="card">
               <span class="card-number">04</span>
-              <h3>Calm Environment</h3>
-              <p>The studio is intentionally warm, aesthetic, and organic because environment shapes how children feel and learn.</p>
-            </article>
-            <article class="card">
-              <span class="card-number">05</span>
-              <h3>Community Learning</h3>
-              <p>Children collaborate, share ideas, support each other, and become part of a kind learning community.</p>
+              <h3>Calm, Community-Based Environment</h3>
+              <p>The studio is intentionally warm, aesthetic, and organic because environment shapes how children feel and learn. Children collaborate, share ideas, support one another, and become part of a kind learning community.</p>
             </article>
           </div>
         </div>
@@ -1413,6 +1451,38 @@
             <h2>Holistic constructivist learning.</h2>
             <p>Children do not simply receive information. They actively build understanding through experience, conversation, observation, creativity, and reflection.</p>
             <p>The aim is not just to help children learn more. The aim is to help them become more thoughtful, confident, kind, and capable.</p>
+          </div>
+          <aside class="approach-card" aria-label="Jasmine Learning highlights">
+            <p class="eyebrow">A calm learning studio</p>
+            <p class="quote">A slower, kinder space where children feel safe, seen, and inspired.</p>
+            <ul class="approach-card-list">
+              <li>Socratic discussions that help children listen, reason, and speak with care.</li>
+              <li>Hands-on missions that turn ideas into visible work.</li>
+              <li>A community rhythm built around confidence, kindness, and reflection.</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section projects" id="projects">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Featured Summer Projects</p>
+              <h2>The Light after the Dark</h2>
+            </div>
+            <p>A project-based learning journey designed to help children explore emotional resilience through story, discussion, creativity, and hands-on projects.</p>
+          </div>
+          <div class="project-grid">
+            <article class="project-card">
+              <h3>This Summer: Build Resilience</h3>
+              <p>Children will learn how hope, gratitude, kindness, and self-expression can help us move through difficult feelings and challenging moments.</p>
+              <p><strong>Grow. Create. Inspire.</strong></p>
+            </article>
+            <article class="project-card">
+              <h3>Why these projects matter</h3>
+              <p>Children today are surrounded by pressure, comparison, screens, and fast-paced expectations. These projects give them a slower and more meaningful space to pause, think, create, and understand themselves.</p>
+            </article>
           </div>
         </div>
       </section>
@@ -1436,29 +1506,6 @@
               <span class="age-label">Ages 8 to 12</span>
               <h3>Independent Learners</h3>
               <p>Project-based journeys for older children who are ready for deeper discussions, teamwork, problem-solving, research, creative projects, and meaningful reflection.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section projects" id="projects">
-        <div class="container">
-          <div class="section-head">
-            <div>
-              <p class="eyebrow">Featured Summer Projects</p>
-              <h2>The Light after the Dark</h2>
-            </div>
-            <p>A project-based learning journey designed to help children explore emotional resilience through story, discussion, creativity, and hands-on projects.</p>
-          </div>
-          <div class="project-grid">
-            <article class="project-card">
-              <h3>This Summer: Build Resilience</h3>
-              <p>Children will learn how hope, gratitude, kindness, and self-expression can help us move through difficult feelings and challenging moments.</p>
-              <p><strong>Grow. Create. Inspire.</strong></p>
-            </article>
-            <article class="project-card">
-              <h3>Why these projects matter</h3>
-              <p>Children today are surrounded by pressure, comparison, screens, and fast-paced expectations. These projects give them a slower and more meaningful space to pause, think, create, and understand themselves.</p>
             </article>
           </div>
         </div>
@@ -1644,6 +1691,17 @@
       </div>
     </footer>
   </div>
+  <a class="floating-top" href="#top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M12 19V5"></path>
+      <path d="m5 12 7-7 7 7"></path>
+    </svg>
+  </a>
+  <a class="floating-whatsapp" href="https://wa.me/923084734673?text=Assalam%20o%20Alaikum%2C%20I%20would%20like%20to%20learn%20more%20about%20Jasmine%20Learning." target="_blank" rel="noopener" aria-label="Chat with Jasmine Learning on WhatsApp">
+    <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+      <path d="M16.04 3.2c-6.97 0-12.64 5.53-12.64 12.33 0 2.25.63 4.43 1.82 6.35L3.2 28.8l7.14-1.86a12.9 12.9 0 0 0 5.7 1.34c6.97 0 12.64-5.53 12.64-12.33S23.01 3.2 16.04 3.2Zm0 22.99c-1.88 0-3.72-.49-5.32-1.43l-.38-.22-4.24 1.1 1.13-4.02-.25-.41a10.3 10.3 0 0 1-1.52-5.36c0-5.64 4.75-10.23 10.58-10.23s10.58 4.59 10.58 10.23-4.75 10.34-10.58 10.34Zm5.82-7.7c-.32-.16-1.89-.91-2.18-1.02-.29-.11-.5-.16-.71.16-.21.32-.81 1.02-.99 1.23-.18.21-.37.24-.69.08-.32-.16-1.35-.49-2.57-1.55-.95-.83-1.59-1.86-1.78-2.18-.18-.32-.02-.49.14-.65.14-.14.32-.37.48-.55.16-.18.21-.32.32-.53.11-.21.05-.4-.03-.56-.08-.16-.71-1.67-.97-2.29-.25-.6-.51-.51-.71-.52h-.61c-.21 0-.56.08-.85.4-.29.32-1.12 1.07-1.12 2.61s1.15 3.03 1.31 3.24c.16.21 2.26 3.37 5.49 4.72.77.33 1.37.53 1.84.68.77.24 1.48.21 2.04.13.62-.09 1.89-.75 2.16-1.47.27-.72.27-1.34.19-1.47-.08-.13-.29-.21-.61-.37Z"/>
+    </svg>
+  </a>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       var nav = document.querySelector(".nav");

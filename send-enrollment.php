@@ -2,6 +2,7 @@
 $recipient = 'info@jasminelearning.com';
 $subject = 'New Jasmine Learning Enrollment';
 $phone = '0308-4734673';
+$site_email = 'info@jasminelearning.com';
 
 function clean_text($value) {
     $value = trim((string) $value);
@@ -88,13 +89,20 @@ $body_lines = array(
 
 $body = implode("\n", $body_lines);
 
+$reply_name = htmlspecialchars_decode($parent_name, ENT_QUOTES);
+$reply_name = preg_replace('/[^A-Za-z0-9 ._\'-]/', '', $reply_name);
+
 $headers = array(
-    'From: Jasmine Learning Website <' . $recipient . '>',
-    'Reply-To: ' . htmlspecialchars_decode($parent_name, ENT_QUOTES) . ' <' . $email . '>',
-    'Content-Type: text/plain; charset=UTF-8'
+    'MIME-Version: 1.0',
+    'Content-Type: text/plain; charset=UTF-8',
+    'Content-Transfer-Encoding: 8bit',
+    'From: Jasmine Learning Website <' . $site_email . '>',
+    'Reply-To: ' . $reply_name . ' <' . $email . '>',
+    'Return-Path: ' . $site_email,
+    'X-Mailer: PHP/' . phpversion()
 );
 
-$sent = mail($recipient, $subject, $body, implode("\r\n", $headers));
+$sent = mail($recipient, $subject, $body, implode("\r\n", $headers), '-f' . $site_email);
 
 if ($sent) {
     render_page('Thank you.', 'Your enrollment request has been received. Bank transfer details will be shared with you shortly.', true);
