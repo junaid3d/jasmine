@@ -1,0 +1,1748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Jasmine Learning is a calm, community-based holistic and constructivist learning studio for children aged 3 to 12 in PCSIR Society.">
+  <title>Jasmine Learning | Calm, Curious Learning for Children</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #f6efe2;
+      --jasmine: #fffdf6;
+      --paper: #fbf7ed;
+      --sage: #93a17e;
+      --sage-soft: #dce5cf;
+      --clay: #c58b6a;
+      --clay-soft: #edd5c3;
+      --olive: #2c3826;
+      --olive-soft: #627055;
+      --moss: #72805e;
+      --petal: #fff9e7;
+      --line: rgba(44, 56, 38, 0.14);
+      --shadow: 0 28px 80px rgba(70, 59, 39, 0.13);
+      --radius: 30px;
+      --serif: "Cormorant Garamond", Georgia, serif;
+      --sans: "Nunito Sans", Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 10% 2%, rgba(220, 229, 207, 0.92), transparent 29rem),
+        radial-gradient(circle at 88% 10%, rgba(237, 213, 195, 0.72), transparent 25rem),
+        radial-gradient(circle at 70% 46%, rgba(255, 253, 246, 0.72), transparent 35rem),
+        linear-gradient(180deg, var(--cream), #f2e8d8 46%, #faf4e9);
+      color: var(--olive);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.34;
+      background-image:
+        linear-gradient(rgba(47, 58, 39, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(47, 58, 39, 0.025) 1px, transparent 1px);
+      background-size: 46px 46px;
+      mask-image: linear-gradient(to bottom, #000, transparent 72%);
+      z-index: -2;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page::before,
+    .page::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+      z-index: -1;
+      border: 1px solid rgba(115, 128, 94, 0.14);
+      background: rgba(255, 253, 246, 0.28);
+      filter: blur(0.1px);
+    }
+
+    .page::before {
+      top: 120px;
+      right: -120px;
+      width: 340px;
+      height: 520px;
+      border-radius: 58% 42% 48% 52%;
+      transform: rotate(22deg);
+    }
+
+    .page::after {
+      top: 760px;
+      left: -170px;
+      width: 380px;
+      height: 380px;
+      border-radius: 42% 58% 45% 55%;
+      transform: rotate(-18deg);
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(47, 58, 39, 0.1);
+      background: rgba(246, 239, 226, 0.82);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 76px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--serif);
+      font-size: 1.62rem;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .brand-mark {
+      position: relative;
+      display: inline-grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(47, 58, 39, 0.18);
+      border-radius: 50%;
+      background: var(--jasmine);
+      box-shadow: 0 10px 22px rgba(47, 58, 39, 0.08);
+    }
+
+    .brand-mark::before,
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      width: 16px;
+      height: 22px;
+      border-radius: 100% 0 100% 0;
+      background: var(--sage-soft);
+      transform: rotate(42deg);
+    }
+
+    .brand-mark::after {
+      background: var(--clay-soft);
+      transform: rotate(222deg);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: var(--olive-soft);
+      font-size: 0.93rem;
+      font-weight: 800;
+    }
+
+    .nav-links a {
+      border-bottom: 1px solid transparent;
+      transition: color 180ms ease, border-color 180ms ease;
+    }
+
+    .menu-toggle {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      min-height: 44px;
+      padding: 0 15px;
+      border: 1px solid rgba(44, 56, 38, 0.12);
+      border-radius: 999px;
+      background: rgba(255, 253, 246, 0.7);
+      color: var(--olive);
+      cursor: pointer;
+      font: 800 0.92rem/1 var(--sans);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.48);
+    }
+
+    .menu-toggle-mark {
+      position: relative;
+      display: inline-block;
+      width: 18px;
+      height: 12px;
+    }
+
+    .menu-toggle-mark::before,
+    .menu-toggle-mark::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 18px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--olive);
+      transition: transform 220ms ease, top 220ms ease;
+    }
+
+    .menu-toggle-mark::before {
+      top: 1px;
+    }
+
+    .menu-toggle-mark::after {
+      top: 9px;
+    }
+
+    .nav.is-open .menu-toggle-mark::before {
+      top: 5px;
+      transform: rotate(42deg);
+    }
+
+    .nav.is-open .menu-toggle-mark::after {
+      top: 5px;
+      transform: rotate(-42deg);
+    }
+
+    .nav-links a:last-child {
+      padding: 9px 14px;
+      border: 1px solid rgba(44, 56, 38, 0.12);
+      border-radius: 999px;
+      background: rgba(255, 253, 246, 0.62);
+      color: var(--olive);
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus {
+      color: var(--olive);
+      border-color: var(--clay);
+    }
+
+    :focus-visible {
+      outline: 3px solid rgba(197, 139, 106, 0.44);
+      outline-offset: 4px;
+    }
+
+    .section {
+      position: relative;
+      padding: 104px 0;
+    }
+
+    .hero {
+      position: relative;
+      min-height: calc(100dvh - 76px);
+      display: grid;
+      align-items: center;
+      padding: 68px 0 46px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      left: max(18px, calc((100vw - 1180px) / 2));
+      bottom: 18px;
+      width: min(520px, 44vw);
+      height: 1px;
+      background: linear-gradient(90deg, rgba(197, 139, 106, 0.65), transparent);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.18fr) minmax(330px, 0.72fr);
+      gap: clamp(34px, 6vw, 78px);
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 20px;
+      color: var(--moss);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 42px;
+      height: 1px;
+      background: var(--clay);
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      color: var(--olive);
+      font-family: var(--serif);
+      font-weight: 700;
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      max-width: 830px;
+      font-size: clamp(3.35rem, 7.2vw, 7.05rem);
+      text-wrap: balance;
+    }
+
+    h2 {
+      max-width: 760px;
+      font-size: clamp(2.3rem, 4.6vw, 4.55rem);
+      text-wrap: balance;
+    }
+
+    h3 {
+      font-size: clamp(1.45rem, 2vw, 2rem);
+      line-height: 1.12;
+    }
+
+    p {
+      margin: 0;
+      color: var(--olive-soft);
+    }
+
+    .hero-copy {
+      max-width: 720px;
+      margin-top: 28px;
+      font-size: clamp(1.08rem, 1.35vw, 1.24rem);
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 36px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      padding: 0 25px;
+      border: 1px solid rgba(47, 58, 39, 0.14);
+      border-radius: 999px;
+      cursor: pointer;
+      font: 800 0.96rem/1 var(--sans);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24);
+      transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1), background 260ms ease, box-shadow 260ms ease;
+    }
+
+    .button:hover,
+    .button:focus {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 36px rgba(47, 58, 39, 0.16);
+    }
+
+    .button:active {
+      transform: translateY(-1px) scale(0.99);
+    }
+
+    .button-primary {
+      background: var(--olive);
+      color: var(--jasmine);
+    }
+
+    .button-secondary {
+      background: rgba(255, 253, 247, 0.66);
+      color: var(--olive);
+    }
+
+    .hero-note {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+      color: var(--olive-soft);
+      font-size: 0.93rem;
+      font-weight: 800;
+    }
+
+    .hero-note span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
+      border: 1px solid rgba(44, 56, 38, 0.1);
+      border-radius: 999px;
+      background: rgba(255, 253, 246, 0.6);
+    }
+
+    .hero-note span::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50% 50% 50% 0;
+      background: var(--clay);
+      transform: rotate(-35deg);
+    }
+
+    .hero-card {
+      position: relative;
+      padding: 38px;
+      border: 1px solid var(--line);
+      border-radius: 36px;
+      background:
+        linear-gradient(145deg, rgba(255, 253, 246, 0.92), rgba(251, 247, 237, 0.72));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      top: -60px;
+      right: -20px;
+      width: 190px;
+      height: 190px;
+      border: 1px solid rgba(115, 128, 95, 0.2);
+      border-radius: 42% 58% 48% 52%;
+      background:
+        radial-gradient(circle, rgba(255, 253, 247, 0.94) 0 22%, transparent 23%),
+        conic-gradient(from 20deg, rgba(220, 226, 208, 0.82), rgba(234, 210, 192, 0.72), rgba(220, 226, 208, 0.82));
+      opacity: 0.78;
+      z-index: 0;
+    }
+
+    .hero-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-card .quote {
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      color: var(--olive);
+      font-family: var(--serif);
+      font-size: clamp(1.9rem, 3vw, 2.55rem);
+      font-weight: 600;
+      line-height: 1.12;
+    }
+
+    .hero-card-list {
+      display: grid;
+      gap: 12px;
+      margin: 24px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .hero-card-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      color: var(--olive-soft);
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .hero-card-list li::before {
+      content: "";
+      flex: 0 0 auto;
+      width: 13px;
+      height: 13px;
+      margin-top: 5px;
+      border-radius: 65% 35% 65% 35%;
+      background: var(--sage);
+      transform: rotate(22deg);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .stat {
+      min-height: 106px;
+      padding: 18px 16px;
+      border: 1px solid rgba(47, 58, 39, 0.1);
+      border-radius: 22px;
+      background: rgba(246, 239, 226, 0.72);
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--olive);
+      font-family: var(--serif);
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 8px;
+      color: var(--olive-soft);
+      font-size: 0.84rem;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.88fr) minmax(280px, 0.52fr);
+      gap: clamp(28px, 5vw, 56px);
+      align-items: end;
+      margin-bottom: 48px;
+    }
+
+    .section-head p {
+      font-size: 1.05rem;
+    }
+
+    .panel,
+    .card,
+    .form-wrap {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 253, 246, 0.72);
+      box-shadow: 0 22px 58px rgba(70, 59, 39, 0.08);
+    }
+
+    .panel {
+      padding: clamp(26px, 5vw, 56px);
+      backdrop-filter: blur(14px);
+    }
+
+    .about-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(290px, 0.52fr);
+      gap: clamp(30px, 6vw, 72px);
+      align-items: center;
+    }
+
+    .about-panel p + p {
+      margin-top: 18px;
+    }
+
+    .soft-list {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .soft-list li {
+      position: relative;
+      padding: 15px 16px 15px 46px;
+      border: 1px solid rgba(44, 56, 38, 0.08);
+      border-radius: 20px;
+      background: rgba(220, 229, 207, 0.46);
+      color: var(--olive);
+      font-weight: 800;
+    }
+
+    .soft-list li::before {
+      content: "";
+      position: absolute;
+      left: 17px;
+      top: 19px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50% 50% 50% 0;
+      background: var(--clay);
+      transform: rotate(-35deg);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr 1fr;
+      gap: 18px;
+    }
+
+    .card {
+      position: relative;
+      padding: 28px;
+      overflow: hidden;
+      transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 260ms ease, border-color 260ms ease;
+    }
+
+    .card::after,
+    .age-card::after,
+    .parent-card::after {
+      content: "";
+      position: absolute;
+      right: -38px;
+      bottom: -46px;
+      width: 126px;
+      height: 126px;
+      border: 1px solid rgba(115, 128, 94, 0.12);
+      border-radius: 62% 38% 50% 50%;
+      background: rgba(220, 229, 207, 0.18);
+      transform: rotate(28deg);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(115, 128, 94, 0.26);
+      box-shadow: 0 30px 70px rgba(70, 59, 39, 0.12);
+    }
+
+    .cards-grid .card {
+      min-height: 260px;
+    }
+
+    .cards-grid .card:first-child {
+      grid-row: span 2;
+      min-height: 100%;
+      background: linear-gradient(160deg, rgba(255, 253, 246, 0.86), rgba(220, 229, 207, 0.48));
+    }
+
+    .cards-grid .card:first-child h3 {
+      font-size: clamp(1.85rem, 3vw, 2.65rem);
+    }
+
+    .cards-grid .card:nth-child(4) {
+      grid-column: span 2;
+    }
+
+    .card p {
+      margin-top: 14px;
+      font-size: 0.96rem;
+    }
+
+    .card-number {
+      display: inline-grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      margin-bottom: 22px;
+      border-radius: 50% 50% 50% 0;
+      background: rgba(220, 229, 207, 0.9);
+      color: var(--olive);
+      font-weight: 800;
+      transform: rotate(-8deg);
+    }
+
+    .approach-grid {
+      display: grid;
+      grid-template-columns: 0.82fr 1fr;
+      gap: 30px;
+      align-items: stretch;
+    }
+
+    .approach-text {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(30px, 4vw, 48px);
+      border-radius: 36px;
+      background:
+        radial-gradient(circle at 12% 10%, rgba(237, 213, 195, 0.23), transparent 15rem),
+        linear-gradient(145deg, #2c3826, #526143);
+    }
+
+    .approach-text::after {
+      content: "";
+      position: absolute;
+      right: -70px;
+      top: -70px;
+      width: 220px;
+      height: 220px;
+      border: 1px solid rgba(255, 253, 246, 0.16);
+      border-radius: 45% 55% 42% 58%;
+      background: rgba(255, 253, 246, 0.04);
+    }
+
+    .approach-text h2,
+    .approach-text p {
+      color: var(--jasmine);
+    }
+
+    .approach-text p {
+      margin-top: 20px;
+      opacity: 0.84;
+    }
+
+    .pill-grid {
+      display: flex;
+      flex-wrap: wrap;
+      align-content: start;
+      gap: 13px;
+      padding: 12px 6px;
+    }
+
+    .pill {
+      padding: 12px 16px;
+      border: 1px solid rgba(47, 58, 39, 0.12);
+      border-radius: 999px;
+      background: rgba(255, 253, 246, 0.74);
+      color: var(--olive);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.52);
+      font-weight: 800;
+      font-size: 0.91rem;
+    }
+
+    .age-grid,
+    .quest-grid,
+    .parent-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .age-card {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(28px, 4vw, 42px);
+      border-radius: 34px;
+      background: rgba(255, 253, 246, 0.76);
+      border: 1px solid var(--line);
+      box-shadow: 0 20px 52px rgba(70, 59, 39, 0.07);
+    }
+
+    .age-label {
+      display: inline-block;
+      margin-bottom: 16px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--clay-soft);
+      color: var(--olive);
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .quest {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 18% 12%, rgba(255, 253, 246, 0.46), transparent 20rem),
+        radial-gradient(circle at 90% 20%, rgba(197, 139, 106, 0.22), transparent 24rem),
+        linear-gradient(135deg, #303c2a, #68765a);
+      color: var(--jasmine);
+    }
+
+    .quest::before {
+      content: "";
+      position: absolute;
+      inset: 28px auto auto 6%;
+      width: 210px;
+      height: 210px;
+      border: 1px solid rgba(255, 253, 246, 0.12);
+      border-radius: 44% 56% 48% 52%;
+      transform: rotate(-24deg);
+    }
+
+    .quest h2,
+    .quest h3,
+    .quest p,
+    .quest .eyebrow {
+      color: var(--jasmine);
+    }
+
+    .quest .eyebrow::before {
+      background: var(--clay-soft);
+    }
+
+    .quest-card,
+    .detail-card {
+      border: 1px solid rgba(255, 253, 247, 0.2);
+      border-radius: 30px;
+      background: rgba(255, 253, 246, 0.12);
+      backdrop-filter: blur(10px);
+      box-shadow: inset 0 1px 0 rgba(255, 253, 246, 0.12);
+    }
+
+    .quest-card {
+      padding: clamp(28px, 4vw, 42px);
+    }
+
+    .quest-card p {
+      margin-top: 18px;
+      color: rgba(255, 253, 247, 0.82);
+    }
+
+    .detail-card {
+      padding: 22px;
+      transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1), background 240ms ease;
+    }
+
+    .detail-card:hover {
+      transform: translateY(-3px);
+      background: rgba(255, 253, 246, 0.16);
+    }
+
+    .detail-card strong {
+      display: block;
+      color: var(--jasmine);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .detail-card span {
+      display: block;
+      margin-top: 6px;
+      color: rgba(255, 253, 247, 0.82);
+      font-size: 1.02rem;
+      font-weight: 700;
+    }
+
+    .quote-section {
+      text-align: center;
+    }
+
+    .quote-section .panel {
+      position: relative;
+      overflow: hidden;
+      background: rgba(255, 253, 247, 0.78);
+    }
+
+    .quote-section .panel::before,
+    .quote-section .panel::after {
+      content: "";
+      position: absolute;
+      width: 230px;
+      height: 230px;
+      border: 1px solid rgba(115, 128, 95, 0.18);
+      border-radius: 54% 46% 48% 52%;
+      background: rgba(220, 226, 208, 0.24);
+    }
+
+    .quote-section .panel::before {
+      left: -90px;
+      top: -110px;
+      transform: rotate(28deg);
+    }
+
+    .quote-section .panel::after {
+      right: -120px;
+      bottom: -120px;
+      transform: rotate(-24deg);
+    }
+
+    .quote-section h2,
+    .quote-section p {
+      position: relative;
+      z-index: 1;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .quote-section p {
+      max-width: 760px;
+      margin-top: 24px;
+      font-size: 1.12rem;
+    }
+
+    .parent-card {
+      padding: clamp(28px, 4vw, 40px);
+    }
+
+    .parent-card ul {
+      display: grid;
+      gap: 10px;
+      margin: 20px 0 0;
+      padding: 0;
+      list-style: none;
+      color: var(--olive-soft);
+    }
+
+    .parent-card li {
+      position: relative;
+      padding-left: 24px;
+    }
+
+    .parent-card li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50% 50% 50% 0;
+      background: var(--sage);
+      transform: rotate(-35deg);
+    }
+
+    .not-card {
+      background: linear-gradient(145deg, rgba(237, 213, 195, 0.54), rgba(255, 253, 246, 0.68));
+    }
+
+    .conversion-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .conversion-step {
+      padding: 18px;
+      border: 1px solid rgba(44, 56, 38, 0.11);
+      border-radius: 22px;
+      background: rgba(255, 253, 246, 0.64);
+    }
+
+    .conversion-step strong {
+      display: block;
+      color: var(--olive);
+      font-family: var(--serif);
+      font-size: 1.45rem;
+      line-height: 1;
+    }
+
+    .conversion-step span {
+      display: block;
+      margin-top: 9px;
+      color: var(--olive-soft);
+      font-size: 0.9rem;
+      font-weight: 800;
+      line-height: 1.4;
+    }
+
+    .enroll {
+      padding-bottom: 110px;
+    }
+
+    .form-wrap {
+      display: grid;
+      grid-template-columns: minmax(270px, 0.54fr) minmax(0, 1fr);
+      gap: clamp(22px, 4vw, 38px);
+      padding: clamp(18px, 3.6vw, 34px);
+      background:
+        radial-gradient(circle at 0 0, rgba(220, 229, 207, 0.56), transparent 18rem),
+        rgba(255, 253, 246, 0.78);
+    }
+
+    .form-aside {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(26px, 4vw, 36px);
+      border-radius: 26px;
+      background:
+        radial-gradient(circle at 22% 10%, rgba(255, 253, 246, 0.5), transparent 13rem),
+        linear-gradient(160deg, var(--sage-soft), #cbd8bd);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42);
+    }
+
+    .form-aside::after {
+      content: "";
+      position: absolute;
+      right: -52px;
+      bottom: -62px;
+      width: 180px;
+      height: 180px;
+      border: 1px solid rgba(44, 56, 38, 0.11);
+      border-radius: 44% 56% 46% 54%;
+      transform: rotate(22deg);
+    }
+
+    .form-aside > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .form-aside p {
+      margin-top: 16px;
+    }
+
+    .form-highlights {
+      display: grid;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .form-highlight {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 13px 14px;
+      border: 1px solid rgba(44, 56, 38, 0.1);
+      border-radius: 18px;
+      background: rgba(255, 253, 246, 0.42);
+      color: var(--olive);
+      font-weight: 800;
+    }
+
+    .form-highlight span:first-child {
+      color: var(--olive-soft);
+      font-weight: 700;
+    }
+
+    form {
+      display: grid;
+      gap: 20px;
+      padding: clamp(4px, 1vw, 8px);
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--olive);
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    .field-grid > div:not(.full) {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .field-grid > div:not(.full) label {
+      display: flex;
+      align-items: flex-end;
+      min-height: 2.75rem;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid rgba(47, 58, 39, 0.18);
+      border-radius: 18px;
+      background: rgba(255, 253, 246, 0.9);
+      color: var(--olive);
+      font: 500 1rem/1.4 var(--sans);
+      outline: none;
+      padding: 15px 16px;
+      transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+
+    textarea {
+      min-height: 132px;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--moss);
+      background: var(--jasmine);
+      box-shadow: 0 0 0 4px rgba(147, 161, 126, 0.22);
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    .form-note {
+      margin-top: 4px;
+      padding: 16px 18px;
+      border: 1px solid rgba(44, 56, 38, 0.08);
+      border-radius: 20px;
+      background: rgba(220, 226, 208, 0.52);
+      color: var(--olive-soft);
+      font-size: 0.93rem;
+      font-weight: 700;
+    }
+
+    .refund {
+      background: rgba(234, 210, 192, 0.5);
+    }
+
+    .whatsapp-helper {
+      justify-self: start;
+      min-height: 48px;
+      padding: 0 20px;
+      border-color: rgba(44, 56, 38, 0.12);
+      background: rgba(220, 229, 207, 0.46);
+      color: var(--olive);
+      box-shadow: none;
+    }
+
+    .whatsapp-helper::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      margin-right: 10px;
+      border-radius: 50% 50% 50% 0;
+      background: var(--sage);
+      transform: rotate(-35deg);
+    }
+
+    .whatsapp-helper:hover,
+    .whatsapp-helper:focus {
+      background: rgba(220, 229, 207, 0.7);
+    }
+
+    .footer {
+      padding: 44px 0;
+      border-top: 1px solid var(--line);
+      background: rgba(47, 58, 39, 0.94);
+      color: var(--jasmine);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 28px;
+      align-items: end;
+    }
+
+    .footer h2 {
+      color: var(--jasmine);
+      font-size: 2.4rem;
+    }
+
+    .footer p,
+    .footer a {
+      color: rgba(255, 253, 247, 0.78);
+    }
+
+    .footer-details {
+      display: grid;
+      gap: 6px;
+      text-align: right;
+      font-weight: 700;
+    }
+
+    @media (max-width: 1060px) {
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .cards-grid .card:first-child {
+        grid-row: auto;
+      }
+
+      .cards-grid .card:nth-child(4) {
+        grid-column: auto;
+      }
+
+      .cards-grid .card:last-child {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .nav-inner {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 12px;
+        min-height: 72px;
+        padding: 12px 0;
+      }
+
+      .brand {
+        min-width: 0;
+        font-size: clamp(1.55rem, 7vw, 2.05rem);
+      }
+
+      .brand span:last-child {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .brand-mark {
+        flex: 0 0 auto;
+        width: 46px;
+        height: 46px;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+      }
+
+      .nav-links {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        width: 100%;
+        max-height: 0;
+        gap: 10px;
+        overflow: hidden;
+        padding: 0;
+        opacity: 0;
+        transition: max-height 260ms cubic-bezier(0.16, 1, 0.3, 1), opacity 180ms ease, padding 260ms ease;
+      }
+
+      .nav.is-open .nav-links {
+        max-height: 260px;
+        padding: 6px 0 8px;
+        opacity: 1;
+      }
+
+      .nav-links a {
+        display: flex;
+        align-items: center;
+        min-height: 48px;
+        padding: 0 16px;
+        border: 1px solid rgba(44, 56, 38, 0.1);
+        border-radius: 18px;
+        background: rgba(255, 253, 246, 0.58);
+        font-size: 0.96rem;
+      }
+
+      .nav-links a:last-child {
+        grid-column: 1 / -1;
+        justify-content: center;
+        min-height: 52px;
+        background: var(--olive);
+        color: var(--jasmine);
+        border-color: transparent;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 54px;
+      }
+
+      .hero-grid,
+      .section-head,
+      .about-panel,
+      .approach-grid,
+      .form-wrap,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card::before {
+        right: -26px;
+      }
+
+      .section {
+        padding: 68px 0;
+      }
+
+      .conversion-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-details {
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .container {
+        width: min(100% - 28px, 1120px);
+      }
+
+      h1 {
+        font-size: clamp(3.1rem, 17vw, 4.8rem);
+      }
+
+      .hero-actions,
+      .button {
+        width: 100%;
+      }
+
+      .whatsapp-helper {
+        justify-self: stretch;
+      }
+
+      .hero-note span {
+        width: 100%;
+      }
+
+      .stats,
+      .age-grid,
+      .quest-grid,
+      .parent-grid,
+      .field-grid,
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cards-grid .card:last-child {
+        grid-column: auto;
+      }
+
+      .hero-card,
+      .card,
+      .age-card,
+      .quest-card,
+      .parent-card,
+      .form-aside {
+        padding: 24px;
+      }
+
+      .form-wrap {
+        padding: 14px;
+        border-radius: 24px;
+      }
+
+      .pill {
+        width: 100%;
+        border-radius: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="nav" aria-label="Primary navigation">
+      <div class="container nav-inner">
+        <a class="brand" href="#top" aria-label="Jasmine Learning home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>Jasmine Learning</span>
+        </a>
+        <button class="menu-toggle" type="button" id="menuToggle" aria-controls="primaryMenu" aria-expanded="false">
+          <span>Menu</span>
+          <span class="menu-toggle-mark" aria-hidden="true"></span>
+        </button>
+        <nav class="nav-links" id="primaryMenu" aria-label="Page sections">
+          <a href="#about">About</a>
+          <a href="#approach">Approach</a>
+          <a href="#quest">Summer Quest</a>
+          <a href="#parents">For Parents</a>
+          <a href="#enroll">Enroll</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div>
+            <p class="eyebrow">Holistic. Constructivist. Community-based.</p>
+            <h1>A calm, curious learning studio for children.</h1>
+            <p class="hero-copy">Jasmine Learning is a warm, project-based learning space for children aged 3 to 12. Through Socratic discussions, hands-on quests, creative expression, and real-world challenges, children grow with curiosity, kindness, and purpose.</p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#enroll">Enroll Now</a>
+              <a class="button button-secondary" href="#quest">Join the Summer Quest</a>
+            </div>
+            <div class="hero-note" aria-label="Jasmine Learning quick details">
+              <span>Ages 3 to 12</span>
+              <span>PCSIR Society</span>
+              <span>Project-based quests</span>
+            </div>
+          </div>
+          <aside class="hero-card" aria-label="Jasmine Learning highlights">
+            <p class="eyebrow">PCSIR Society</p>
+            <h2>Grow gently. Think deeply. Create bravely.</h2>
+            <p class="quote">A slower, kinder space where children feel safe, seen, and inspired.</p>
+            <ul class="hero-card-list">
+              <li>Socratic discussions that help children listen, reason, and speak with care.</li>
+              <li>Hands-on missions that turn ideas into visible work.</li>
+              <li>A community rhythm built around confidence, kindness, and reflection.</li>
+            </ul>
+            <div class="stats" aria-label="Program details">
+              <div class="stat">
+                <strong>3-12</strong>
+                <span>Years old</span>
+              </div>
+              <div class="stat">
+                <strong>2</strong>
+                <span>Age groups</span>
+              </div>
+              <div class="stat">
+                <strong>1</strong>
+                <span>Kind community</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section" id="about">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">About Jasmine Learning</p>
+              <h2>Learning that nurtures the whole child.</h2>
+            </div>
+            <p>In today's world, children need more than worksheets, memorisation, and pressure-driven learning. They need spaces where they can ask questions, work with their hands, express themselves, and learn at a natural pace.</p>
+          </div>
+          <div class="panel about-panel">
+            <div>
+              <p>At Jasmine Learning, children learn through thoughtful questions, meaningful projects, hands-on discovery, and gentle guidance.</p>
+              <p>Our goal is simple: to make quality holistic and constructivist education accessible to more families at a reasonable price.</p>
+            </div>
+            <ul class="soft-list" aria-label="Jasmine Learning values">
+              <li>Think deeply</li>
+              <li>Build confidence</li>
+              <li>Develop kindness and resilience</li>
+              <li>Express ideas with courage</li>
+              <li>Learn in community</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="different">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">What Makes Us Different</p>
+              <h2>A learning studio shaped by questions, projects, and care.</h2>
+            </div>
+            <p>Our programmes are built like meaningful learning adventures, with a theme, a big question, missions, reflections, and a final expression of learning.</p>
+          </div>
+          <div class="cards-grid">
+            <article class="card">
+              <span class="card-number">01</span>
+              <h3>Socratic Discussions</h3>
+              <p>Children learn to think, listen, question, and respond instead of simply being given all the answers.</p>
+            </article>
+            <article class="card">
+              <span class="card-number">02</span>
+              <h3>Hands-on Projects</h3>
+              <p>Every journey includes practical and creative work that children can build, present, and reflect on.</p>
+            </article>
+            <article class="card">
+              <span class="card-number">03</span>
+              <h3>Quest-Based Learning</h3>
+              <p>Children explore big ideas through challenges, missions, teamwork, and final exhibitions.</p>
+            </article>
+            <article class="card">
+              <span class="card-number">04</span>
+              <h3>Calm Environment</h3>
+              <p>The studio is intentionally warm, aesthetic, and organic because environment shapes how children feel and learn.</p>
+            </article>
+            <article class="card">
+              <span class="card-number">05</span>
+              <h3>Community Learning</h3>
+              <p>Children collaborate, share ideas, support each other, and become part of a kind learning community.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="approach">
+        <div class="container approach-grid">
+          <div class="approach-text">
+            <p class="eyebrow">Learning Approach</p>
+            <h2>Holistic constructivist learning.</h2>
+            <p>Children do not simply receive information. They actively build understanding through experience, conversation, observation, creativity, and reflection.</p>
+            <p>The aim is not just to help children learn more. The aim is to help them become more thoughtful, confident, kind, and capable.</p>
+          </div>
+          <div class="pill-grid" aria-label="Learning methods">
+            <span class="pill">Socratic discussions</span>
+            <span class="pill">Story-based learning</span>
+            <span class="pill">Hands-on projects</span>
+            <span class="pill">Art and creative expression</span>
+            <span class="pill">Team missions</span>
+            <span class="pill">Research-based challenges</span>
+            <span class="pill">Reflection circles</span>
+            <span class="pill">Exhibitions and presentations</span>
+            <span class="pill">Real-world problem-solving</span>
+            <span class="pill">Social and emotional development</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="ages">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Age Groups</p>
+              <h2>Two gentle pathways for growing minds.</h2>
+            </div>
+            <p>Each group is designed around the child's developmental stage, with room for wonder, independence, collaboration, and reflection.</p>
+          </div>
+          <div class="age-grid">
+            <article class="age-card">
+              <span class="age-label">Ages 3 to 7</span>
+              <h3>Early Learners</h3>
+              <p>Gentle, playful, sensory-rich learning experiences focused on curiosity, expression, confidence, storytelling, nature, movement, and early social development.</p>
+            </article>
+            <article class="age-card">
+              <span class="age-label">Ages 8 to 12</span>
+              <h3>Independent Learners</h3>
+              <p>Project-based quests for older children who are ready for deeper discussions, teamwork, problem-solving, research, creative projects, and meaningful reflection.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section quest" id="quest">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Featured Summer Quest</p>
+              <h2>The Light after the Dark</h2>
+            </div>
+            <p>A project-based learning journey designed to help children explore emotional resilience through story, discussion, creativity, and hands-on projects.</p>
+          </div>
+          <div class="quest-grid">
+            <article class="quest-card">
+              <h3>This Summer: Build Resilience</h3>
+              <p>Children will learn how hope, gratitude, kindness, and self-expression can help us move through difficult feelings and challenging moments.</p>
+              <p><strong>Grow. Create. Inspire.</strong></p>
+            </article>
+            <article class="quest-card">
+              <h3>Why this quest matters</h3>
+              <p>Children today are surrounded by pressure, comparison, screens, and fast-paced expectations. This quest gives them a slower and more meaningful space to pause, think, create, and understand themselves.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section quest" id="quest-details">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Quest Details</p>
+              <h2>Everything parents need to know.</h2>
+            </div>
+            <p>Through stories, guided discussions, art, and project work, children explore how hope, gratitude, and kindness can bring light into difficult moments.</p>
+          </div>
+          <div class="quest-grid">
+            <div class="detail-card">
+              <strong>Dates</strong>
+              <span>8th to 28th June</span>
+            </div>
+            <div class="detail-card">
+              <strong>Days</strong>
+              <span>Monday to Thursday</span>
+            </div>
+            <div class="detail-card">
+              <strong>Time</strong>
+              <span>To be decided after parent survey</span>
+            </div>
+            <div class="detail-card">
+              <strong>Age Group</strong>
+              <span>8 to 12 years</span>
+            </div>
+            <div class="detail-card">
+              <strong>Fee</strong>
+              <span>Rs. 15,000</span>
+            </div>
+            <div class="detail-card">
+              <strong>Early Bird Fee</strong>
+              <span>Rs. 11,500</span>
+            </div>
+            <div class="detail-card">
+              <strong>Location</strong>
+              <span>PCSIR Society</span>
+            </div>
+            <div class="detail-card">
+              <strong>Conducted by</strong>
+              <span>Maria Amjad, Project-Based Learning Instructor at a renowned American school</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section quote-section" id="philosophy">
+        <div class="container">
+          <div class="panel">
+            <p class="eyebrow">Our Philosophy</p>
+            <h2>The sun is not only for a few.</h2>
+            <p>At Jasmine Learning, we believe meaningful education should not belong only to the privileged. Knowledge, care, creativity, and emotional nourishment should be shared more generously.</p>
+            <p>A candle was never meant to be hidden. And the sun was never meant to belong to one person.</p>
+            <p><strong>Jasmine Learning exists to create a warm, thoughtful, and accessible space where more children can grow in light.</strong></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="parents">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">For Parents</p>
+              <h2>Is this right for your child?</h2>
+            </div>
+            <p>Jasmine Learning is for families looking for calm, meaningful growth rather than pressure, rushing, or rote memorisation.</p>
+          </div>
+          <div class="parent-grid">
+            <article class="card parent-card">
+              <h3>A good fit if you want your child to...</h3>
+              <ul>
+                <li>Become more confident</li>
+                <li>Ask better questions</li>
+                <li>Learn through projects instead of rote memorisation</li>
+                <li>Develop emotional resilience</li>
+                <li>Express ideas through art and discussion</li>
+                <li>Work kindly with other children</li>
+                <li>Build curiosity, independence, and self-awareness</li>
+              </ul>
+            </article>
+            <article class="card parent-card not-card">
+              <h3>What this is not</h3>
+              <p>This is not a tuition centre. This is not a test-preparation programme.</p>
+              <p>This is a learning community designed to help children think, create, reflect, and grow in a calm, non-pressurised environment.</p>
+            </article>
+          </div>
+          <div class="conversion-strip" aria-label="Enrollment steps">
+            <div class="conversion-step">
+              <strong>01</strong>
+              <span>Share your child's details.</span>
+            </div>
+            <div class="conversion-step">
+              <strong>02</strong>
+              <span>Receive bank transfer details.</span>
+            </div>
+            <div class="conversion-step">
+              <strong>03</strong>
+              <span>Confirm the seat after verification.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section enroll" id="enroll">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Enrollment</p>
+              <h2>Reserve your child's place.</h2>
+            </div>
+            <p>We are excited to welcome your child to Jasmine Learning. Please fill out the form below and click Pay Now to receive bank transfer details.</p>
+          </div>
+          <div class="form-wrap">
+            <aside class="form-aside">
+              <h3>Summer Quest Enrollment</h3>
+              <p>Once payment is received and verified, your child's seat will be confirmed.</p>
+              <div class="form-highlights" aria-label="Summer Quest summary">
+                <div class="form-highlight">
+                  <span>Age group</span>
+                  <span>8 to 12</span>
+                </div>
+                <div class="form-highlight">
+                  <span>Early bird</span>
+                  <span>Rs. 11,500</span>
+                </div>
+                <div class="form-highlight">
+                  <span>Location</span>
+                  <span>PCSIR Society</span>
+                </div>
+              </div>
+              <p><strong>Phone:</strong> <a href="tel:+923084734673">0308-4734673</a></p>
+              <p><strong>Website:</strong> <a href="https://jasminelearning.com">jasminelearning.com</a></p>
+            </aside>
+            <form action="send-enrollment.php" method="post" id="enrollmentForm">
+              <div class="field-grid">
+                <div>
+                  <label for="parentName">Parent/Guardian Name</label>
+                  <input type="text" id="parentName" name="parent_name" autocomplete="name" required>
+                </div>
+                <div>
+                  <label for="childName">Child's Name</label>
+                  <input type="text" id="childName" name="child_name" required>
+                </div>
+                <div>
+                  <label for="childAge">Child's Age</label>
+                  <input type="number" id="childAge" name="child_age" min="3" max="12" required>
+                </div>
+                <div>
+                  <label for="phone">Phone Number</label>
+                  <input type="tel" id="phone" name="phone" autocomplete="tel" required>
+                </div>
+                <div>
+                  <label for="email">Email Address</label>
+                  <input type="email" id="email" name="email" autocomplete="email" required>
+                </div>
+                <div>
+                  <label for="constructivist">Are you already familiar with constructivist education?</label>
+                  <select id="constructivist" name="constructivist_familiarity" required>
+                    <option value="">Please select</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="A little">A little</option>
+                  </select>
+                </div>
+                <div class="full">
+                  <label for="expectations">What do you expect your child to learn from this course?</label>
+                  <textarea id="expectations" name="expectations" required></textarea>
+                </div>
+              </div>
+              <button class="button button-primary" type="submit">Pay Now</button>
+              <p class="form-note">After clicking Pay Now, you will receive bank transfer details. Your child’s seat will be confirmed after payment verification.</p>
+              <button class="button whatsapp-helper" type="button" id="whatsappEnrollment">Prefer WhatsApp? Send enrollment details here</button>
+              <p class="form-note refund">50% of the fee is refundable in case your child withdraws after attending 2 classes.</p>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <h2>Jasmine Learning</h2>
+          <p>A calm, community-based learning studio for curious children.</p>
+          <p>Holistic learning. Kind community. Meaningful projects.</p>
+        </div>
+        <address class="footer-details">
+          <span>Location: PCSIR Society</span>
+          <a href="tel:+923084734673">Phone: 0308-4734673</a>
+          <a href="https://jasminelearning.com">Website: jasminelearning.com</a>
+        </address>
+      </div>
+    </footer>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var nav = document.querySelector(".nav");
+      var menuToggle = document.getElementById("menuToggle");
+      var primaryMenu = document.getElementById("primaryMenu");
+      var whatsappButton = document.getElementById("whatsappEnrollment");
+
+      if (nav && menuToggle && primaryMenu) {
+        menuToggle.addEventListener("click", function () {
+          var isOpen = nav.classList.toggle("is-open");
+          menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        });
+
+        primaryMenu.querySelectorAll("a").forEach(function (link) {
+          link.addEventListener("click", function () {
+            nav.classList.remove("is-open");
+            menuToggle.setAttribute("aria-expanded", "false");
+          });
+        });
+      }
+
+      if (whatsappButton) {
+        whatsappButton.addEventListener("click", function () {
+          var fields = [
+            { label: "Parent/Guardian Name", id: "parentName" },
+            { label: "Child's Name", id: "childName" },
+            { label: "Child's Age", id: "childAge" },
+            { label: "Phone Number", id: "phone" },
+            { label: "Email Address", id: "email" },
+            { label: "Familiarity with constructivist education", id: "constructivist" },
+            { label: "Expectations from the course", id: "expectations" }
+          ];
+
+          var messageLines = [
+            "Assalam o Alaikum, I would like to enroll my child at Jasmine Learning."
+          ];
+
+          fields.forEach(function (field) {
+            var input = document.getElementById(field.id);
+            var value = input ? input.value.trim() : "";
+
+            if (value) {
+              messageLines.push(field.label + ": " + value);
+            }
+          });
+
+          var whatsappUrl = "https://wa.me/923084734673?text=" + encodeURIComponent(messageLines.join("\n"));
+          window.open(whatsappUrl, "_blank", "noopener");
+        });
+      }
+    });
+  </script>
+</body>
+</html>
