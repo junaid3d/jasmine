@@ -1,0 +1,6 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/navephnl/jasminelearning.com/
+    - /bin/rm -rf $DEPLOYPATH/*
+    - /bin/cp -R * $DEPLOYPATH
