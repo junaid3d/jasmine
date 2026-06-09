@@ -1,12 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Jasmine Learning is a calm, community-based holistic and constructivist learning studio for children aged 3 to 12.">
+  <meta name="description" content="Jasmine Learning is a calm, community-based learning studio for children ages 3 to 12, offering holistic constructivist education through Socratic discussions, hands-on projects, and Acton-style learning quests.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jasminelearning.com">
+  <meta property="og:title" content="Jasmine Learning | Holistic Learning Studio for Children">
+  <meta property="og:description" content="A calm, organic learning space for curious children, built around constructivist education, Socratic discussions, hands-on projects, and quest-based learning.">
+  <meta property="og:image" content="https://jasminelearning.com/img/FB-OG-IMG.jpg">
+  <meta property="og:image:secure_url" content="https://jasminelearning.com/img/FB-OG-IMG.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Jasmine Learning | Holistic Learning Studio for Children">
+  <meta name="twitter:description" content="A calm, organic learning space for curious children, built around constructivist education, Socratic discussions, hands-on projects, and quest-based learning.">
+  <meta name="twitter:image" content="https://jasminelearning.com/img/FB-OG-IMG.jpg">
   <title>Jasmine Learning | Calm, Curious Learning for Children</title>
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+  <link rel="preload" as="image" href="img/header-darkmode.jpg">
+  <link rel="preload" as="image" href="img/header-mobile-banner-vertical-darkmode.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-55Z297YMH4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-55Z297YMH4');
+  </script>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -26,6 +51,23 @@
       --radius: 30px;
       --serif: "Cormorant Garamond", Georgia, serif;
       --sans: "Nunito Sans", Arial, sans-serif;
+    }
+
+    [data-theme="dark"] {
+      color-scheme: dark;
+      --cream: #161d13;
+      --jasmine: #fff7e8;
+      --paper: #202916;
+      --sage: #a9ba91;
+      --sage-soft: #34422b;
+      --clay: #d1a17b;
+      --clay-soft: #5b4434;
+      --olive: #fbf5e7;
+      --olive-soft: #cbd6bb;
+      --moss: #b7c7a1;
+      --petal: #2a351f;
+      --line: rgba(255, 247, 232, 0.14);
+      --shadow: 0 30px 82px rgba(0, 0, 0, 0.38);
     }
 
     * {
@@ -142,24 +184,27 @@
       height: 40px;
       border: 1px solid rgba(47, 58, 39, 0.18);
       border-radius: 50%;
-      background: var(--jasmine);
+      background: rgba(255, 253, 246, 0.92);
       box-shadow: 0 10px 22px rgba(47, 58, 39, 0.08);
+      overflow: hidden;
     }
 
-    .brand-mark::before,
-    .brand-mark::after {
-      content: "";
+    .brand-logo {
       position: absolute;
-      width: 16px;
-      height: 22px;
-      border-radius: 100% 0 100% 0;
-      background: var(--sage-soft);
-      transform: rotate(42deg);
+      width: 29px;
+      height: 29px;
+      object-fit: contain;
+      transition: opacity 360ms ease, transform 360ms ease;
     }
 
-    .brand-mark::after {
-      background: var(--clay-soft);
-      transform: rotate(222deg);
+    .brand-logo-light {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .brand-logo-dusk {
+      opacity: 0;
+      transform: scale(0.92);
     }
 
     .nav-links {
@@ -247,6 +292,31 @@
       outline-offset: 4px;
     }
 
+    body,
+    .nav,
+    .panel,
+    .card,
+    .form-wrap,
+    .age-card,
+    .approach-card,
+    .project-card,
+    .detail-card,
+    .form-aside,
+    .footer,
+    .button,
+    .floating-theme,
+    .floating-top,
+    .floating-whatsapp,
+    input,
+    select,
+    textarea {
+      transition:
+        background-color 520ms ease,
+        color 520ms ease,
+        border-color 520ms ease,
+        box-shadow 520ms ease;
+    }
+
     .section {
       position: relative;
       padding: 60px 0;
@@ -259,43 +329,121 @@
       align-items: center;
       padding: clamp(72px, 11vw, 128px) 0 clamp(76px, 10vw, 118px);
       overflow: hidden;
-      background:
-        linear-gradient(90deg, rgba(246, 239, 226, 0.96) 0%, rgba(246, 239, 226, 0.86) 26%, rgba(246, 239, 226, 0.34) 58%, rgba(246, 239, 226, 0.08) 100%),
-        linear-gradient(180deg, rgba(44, 56, 38, 0.08), rgba(44, 56, 38, 0.1)),
-        url("img/header.jpg") center right / cover no-repeat;
+      background: var(--cream);
+      transition: background-color 520ms ease;
     }
 
     .hero::before {
       content: "";
       position: absolute;
-      inset: auto 0 0;
-      height: 34%;
-      background: linear-gradient(180deg, transparent, var(--cream));
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(246, 239, 226, 0.96) 0%, rgba(246, 239, 226, 0.86) 26%, rgba(246, 239, 226, 0.34) 58%, rgba(246, 239, 226, 0.08) 100%),
+        linear-gradient(180deg, rgba(44, 56, 38, 0.08), rgba(44, 56, 38, 0.1)),
+        linear-gradient(180deg, transparent 66%, var(--cream) 100%),
+        url("img/header.jpg") center right / cover no-repeat;
       pointer-events: none;
+      transition: opacity 720ms ease;
     }
 
     .hero::after {
       content: "";
       position: absolute;
-      left: -11vw;
-      top: 12%;
-      width: 48vw;
-      height: 48vw;
-      min-width: 360px;
-      min-height: 360px;
-      border: 1px solid rgba(115, 128, 94, 0.12);
-      border-radius: 52% 48% 44% 56%;
-      background: rgba(255, 253, 246, 0.18);
-      transform: rotate(-16deg);
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(21, 29, 19, 0.94) 0%, rgba(21, 29, 19, 0.82) 32%, rgba(21, 29, 19, 0.34) 64%, rgba(21, 29, 19, 0.08) 100%),
+        linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.28)),
+        linear-gradient(180deg, transparent 66%, var(--cream) 100%),
+        url("img/header-darkmode.jpg") center right / cover no-repeat;
+      opacity: 0;
       pointer-events: none;
+      transition: opacity 720ms ease;
     }
 
     .hero-grid {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       display: grid;
       grid-template-columns: minmax(0, 0.68fr) minmax(240px, 0.32fr);
       align-items: end;
+    }
+
+    .hero-fireflies {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 700ms ease;
+    }
+
+    [data-theme="dark"] .hero-fireflies {
+      opacity: 1;
+    }
+
+    .firefly {
+      position: absolute;
+      left: var(--left);
+      top: var(--top);
+      width: var(--size);
+      height: var(--size);
+      border-radius: 999px;
+      background: rgba(255, 239, 166, 0.96);
+      box-shadow:
+        0 0 10px rgba(255, 228, 136, 0.9),
+        0 0 26px rgba(231, 181, 93, 0.46);
+      opacity: 0;
+      filter: blur(0.1px);
+      transform: translate3d(0, 0, 0);
+      animation:
+        firefly-drift var(--duration) ease-in-out var(--delay) infinite alternate,
+        firefly-glow var(--flash) ease-in-out var(--delay) infinite;
+    }
+
+    .firefly::before {
+      content: "";
+      position: absolute;
+      inset: -8px;
+      border-radius: inherit;
+      background: radial-gradient(circle, rgba(255, 226, 143, 0.34), transparent 66%);
+    }
+
+    .firefly:nth-child(1) { --left: 18%; --top: 30%; --size: 4px; --duration: 18s; --flash: 5.8s; --delay: -1s; --x1: 8vw; --y1: -9vh; --x2: 19vw; --y2: 5vh; --x3: 5vw; --y3: 19vh; }
+    .firefly:nth-child(2) { --left: 39%; --top: 24%; --size: 3px; --duration: 22s; --flash: 7.4s; --delay: -4s; --x1: -9vw; --y1: 7vh; --x2: 8vw; --y2: 18vh; --x3: 24vw; --y3: 2vh; }
+    .firefly:nth-child(3) { --left: 58%; --top: 34%; --size: 5px; --duration: 20s; --flash: 6.2s; --delay: -7s; --x1: 6vw; --y1: 14vh; --x2: -12vw; --y2: 22vh; --x3: -20vw; --y3: -4vh; }
+    .firefly:nth-child(4) { --left: 72%; --top: 18%; --size: 3px; --duration: 26s; --flash: 8.5s; --delay: -2s; --x1: -14vw; --y1: 11vh; --x2: -3vw; --y2: 26vh; --x3: 10vw; --y3: 10vh; }
+    .firefly:nth-child(5) { --left: 82%; --top: 52%; --size: 4px; --duration: 19s; --flash: 6.8s; --delay: -5s; --x1: -8vw; --y1: -12vh; --x2: -24vw; --y2: -2vh; --x3: -12vw; --y3: 17vh; }
+    .firefly:nth-child(6) { --left: 48%; --top: 64%; --size: 3px; --duration: 24s; --flash: 9s; --delay: -9s; --x1: 15vw; --y1: -8vh; --x2: 4vw; --y2: -24vh; --x3: -10vw; --y3: -10vh; }
+    .firefly:nth-child(7) { --left: 29%; --top: 70%; --size: 4px; --duration: 21s; --flash: 5.5s; --delay: -6s; --x1: -7vw; --y1: -18vh; --x2: 10vw; --y2: -30vh; --x3: 22vw; --y3: -12vh; }
+    .firefly:nth-child(8) { --left: 64%; --top: 72%; --size: 3px; --duration: 28s; --flash: 8.1s; --delay: -11s; --x1: 17vw; --y1: -17vh; --x2: 3vw; --y2: -36vh; --x3: -18vw; --y3: -22vh; }
+    .firefly:nth-child(9) { --left: 90%; --top: 30%; --size: 4px; --duration: 23s; --flash: 7s; --delay: -8s; --x1: -12vw; --y1: 5vh; --x2: -28vw; --y2: 19vh; --x3: -15vw; --y3: 31vh; }
+    .firefly:nth-child(10) { --left: 52%; --top: 13%; --size: 3px; --duration: 25s; --flash: 6.4s; --delay: -3s; --x1: -16vw; --y1: 9vh; --x2: -4vw; --y2: 24vh; --x3: 18vw; --y3: 17vh; }
+
+    @keyframes firefly-drift {
+      0% { transform: translate3d(0, 0, 0) scale(0.7); }
+      28% { transform: translate3d(var(--x1), var(--y1), 0) scale(1); }
+      58% { transform: translate3d(var(--x2), var(--y2), 0) scale(0.82); }
+      100% { transform: translate3d(var(--x3), var(--y3), 0) scale(1.08); }
+    }
+
+    @keyframes firefly-glow {
+      0%, 24%, 100% {
+        opacity: 0;
+        box-shadow: 0 0 0 rgba(255, 228, 136, 0), 0 0 0 rgba(231, 181, 93, 0);
+      }
+      7% {
+        opacity: 0.95;
+        box-shadow:
+          0 0 12px rgba(255, 238, 167, 0.95),
+          0 0 34px rgba(231, 181, 93, 0.58);
+      }
+      11% {
+        opacity: 0.22;
+      }
+      15% {
+        opacity: 0.82;
+      }
     }
 
     .hero-content {
@@ -626,6 +774,11 @@
 
     .cards-grid .card {
       min-height: 238px;
+    }
+
+    .cards-grid .card-wide {
+      grid-column: 1 / -1;
+      min-height: 220px;
     }
 
     .card p {
@@ -1117,6 +1270,225 @@
       stroke-width: 2.25;
     }
 
+    .floating-theme {
+      position: fixed;
+      right: 22px;
+      bottom: 154px;
+      z-index: 20;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border: 1px solid rgba(44, 56, 38, 0.12);
+      border-radius: 50%;
+      background: rgba(255, 253, 246, 0.88);
+      color: var(--olive);
+      box-shadow: 0 16px 38px rgba(44, 56, 38, 0.16);
+      backdrop-filter: blur(14px);
+      cursor: pointer;
+      transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 220ms ease, background 220ms ease;
+    }
+
+    .floating-theme:hover,
+    .floating-theme:focus {
+      transform: translateY(-3px);
+      background: var(--jasmine);
+      box-shadow: 0 22px 48px rgba(44, 56, 38, 0.22);
+    }
+
+    .floating-theme:active {
+      transform: translateY(-1px) scale(0.98);
+    }
+
+    .floating-theme svg {
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 2.15;
+      transition: opacity 220ms ease, transform 220ms ease;
+    }
+
+    .theme-icon-sun {
+      opacity: 0;
+      transform: scale(0.72) rotate(-18deg);
+    }
+
+    .theme-icon-moon {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+
+    [data-theme="dark"] .theme-icon-sun {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+
+    [data-theme="dark"] .theme-icon-moon {
+      opacity: 0;
+      transform: scale(0.72) rotate(18deg);
+    }
+
+    [data-theme="dark"] body {
+      background:
+        radial-gradient(circle at 12% 4%, rgba(52, 66, 43, 0.72), transparent 31rem),
+        radial-gradient(circle at 88% 10%, rgba(91, 68, 52, 0.44), transparent 26rem),
+        radial-gradient(circle at 70% 46%, rgba(255, 247, 232, 0.08), transparent 35rem),
+        linear-gradient(180deg, #151d13, #202617 48%, #171f14);
+    }
+
+    [data-theme="dark"] body::before {
+      opacity: 0.22;
+      background-image:
+        linear-gradient(rgba(255, 247, 232, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 247, 232, 0.035) 1px, transparent 1px);
+    }
+
+    [data-theme="dark"] .page::before,
+    [data-theme="dark"] .page::after {
+      border-color: rgba(255, 247, 232, 0.09);
+      background: rgba(169, 186, 145, 0.08);
+    }
+
+    [data-theme="dark"] .nav {
+      border-bottom-color: rgba(255, 247, 232, 0.1);
+      background: rgba(21, 29, 19, 0.78);
+    }
+
+    [data-theme="dark"] .menu-toggle,
+    [data-theme="dark"] .button-secondary,
+    [data-theme="dark"] .hero-note span,
+    [data-theme="dark"] .floating-top,
+    [data-theme="dark"] .floating-theme {
+      border-color: rgba(255, 247, 232, 0.14);
+      background: rgba(255, 247, 232, 0.1);
+      color: var(--olive);
+      box-shadow: inset 0 1px 0 rgba(255, 247, 232, 0.08);
+    }
+
+    [data-theme="dark"] .brand-mark {
+      border-color: rgba(255, 247, 232, 0.14);
+      background: rgba(255, 247, 232, 0.08);
+      box-shadow: inset 0 1px 0 rgba(255, 247, 232, 0.08);
+    }
+
+    [data-theme="dark"] .brand-logo-light {
+      opacity: 0;
+      transform: scale(0.92);
+    }
+
+    [data-theme="dark"] .brand-logo-dusk {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    [data-theme="dark"] .hero {
+      background: var(--cream);
+    }
+
+    [data-theme="dark"] .hero::after {
+      opacity: 1;
+    }
+
+    [data-theme="dark"] .nav-links a {
+      background: transparent;
+      border-color: transparent;
+      box-shadow: none;
+    }
+
+    [data-theme="dark"] .nav-links a:last-child {
+      background: rgba(255, 247, 232, 0.1);
+      border-color: rgba(255, 247, 232, 0.16);
+    }
+
+    [data-theme="dark"] .brand-hero-title,
+    [data-theme="dark"] .hero-tagline {
+      color: var(--jasmine);
+      text-shadow: 0 4px 34px rgba(0, 0, 0, 0.54);
+    }
+
+    [data-theme="dark"] .panel,
+    [data-theme="dark"] .card,
+    [data-theme="dark"] .form-wrap,
+    [data-theme="dark"] .age-card,
+    [data-theme="dark"] .approach-card {
+      background: rgba(255, 247, 232, 0.08);
+      border-color: rgba(255, 247, 232, 0.13);
+      box-shadow: 0 26px 70px rgba(0, 0, 0, 0.28);
+    }
+
+    [data-theme="dark"] .soft-list li,
+    [data-theme="dark"] .form-note,
+    [data-theme="dark"] .form-highlight {
+      background: rgba(169, 186, 145, 0.13);
+      border-color: rgba(255, 247, 232, 0.12);
+    }
+
+    [data-theme="dark"] .not-card,
+    [data-theme="dark"] .refund {
+      background: rgba(209, 161, 123, 0.13);
+    }
+
+    [data-theme="dark"] .approach-text {
+      background:
+        radial-gradient(circle at 12% 10%, rgba(209, 161, 123, 0.16), transparent 15rem),
+        linear-gradient(145deg, #26331f, #3e4d34);
+      border: 1px solid rgba(255, 247, 232, 0.1);
+    }
+
+    [data-theme="dark"] .projects {
+      background:
+        radial-gradient(circle at 18% 12%, rgba(255, 247, 232, 0.16), transparent 20rem),
+        radial-gradient(circle at 90% 20%, rgba(209, 161, 123, 0.16), transparent 24rem),
+        linear-gradient(135deg, #23301d, #3e4d34);
+    }
+
+    [data-theme="dark"] .project-card,
+    [data-theme="dark"] .detail-card {
+      background: rgba(255, 247, 232, 0.08);
+      border-color: rgba(255, 247, 232, 0.16);
+    }
+
+    [data-theme="dark"] .card-number {
+      background: rgba(220, 229, 207, 0.94);
+      color: #24341f;
+    }
+
+    [data-theme="dark"] .form-aside {
+      background:
+        radial-gradient(circle at 22% 10%, rgba(255, 247, 232, 0.16), transparent 13rem),
+        linear-gradient(160deg, #34422b, #48583a);
+    }
+
+    [data-theme="dark"] input,
+    [data-theme="dark"] select,
+    [data-theme="dark"] textarea {
+      background: rgba(255, 247, 232, 0.09);
+      border-color: rgba(255, 247, 232, 0.18);
+      color: var(--olive);
+    }
+
+    [data-theme="dark"] input:focus,
+    [data-theme="dark"] select:focus,
+    [data-theme="dark"] textarea:focus {
+      background: rgba(255, 247, 232, 0.13);
+      box-shadow: 0 0 0 4px rgba(169, 186, 145, 0.22);
+    }
+
+    [data-theme="dark"] .button-primary,
+    [data-theme="dark"] .floating-whatsapp {
+      background: var(--jasmine);
+      color: #202916;
+    }
+
+    [data-theme="dark"] .footer {
+      background: rgba(12, 17, 10, 0.96);
+    }
+
     .footer {
       padding: 44px 0;
       border-top: 1px solid var(--line);
@@ -1129,6 +1501,44 @@
       grid-template-columns: 1fr auto;
       gap: 28px;
       align-items: end;
+    }
+
+    .footer-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 4px;
+    }
+
+    .footer-logo {
+      position: relative;
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 auto;
+      width: 52px;
+      height: 52px;
+      border: 1px solid rgba(255, 253, 247, 0.16);
+      border-radius: 50%;
+      background: rgba(255, 253, 247, 0.08);
+      overflow: hidden;
+    }
+
+    .footer-logo img {
+      position: absolute;
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+      transition: opacity 360ms ease, transform 360ms ease;
+    }
+
+    .footer-logo .brand-logo-light {
+      opacity: 0;
+      transform: scale(0.92);
+    }
+
+    .footer-logo .brand-logo-dusk {
+      opacity: 1;
+      transform: scale(1);
     }
 
     .footer h2 {
@@ -1237,10 +1647,22 @@
       .hero {
         min-height: 78dvh;
         padding: 96px 0 3px;
+      }
+
+      .hero::before {
         background:
           linear-gradient(90deg, rgba(246, 239, 226, 0.96) 0%, rgba(246, 239, 226, 0.82) 44%, rgba(246, 239, 226, 0.2) 100%),
           linear-gradient(180deg, rgba(44, 56, 38, 0.04), rgba(44, 56, 38, 0.14)),
-          url("img/header.jpg") 62% center / cover no-repeat;
+          linear-gradient(180deg, transparent 66%, var(--cream) 100%),
+          url("img/header-mobile-banner-vertical.jpg") 62% center / cover no-repeat;
+      }
+
+      .hero::after {
+        background:
+          linear-gradient(90deg, rgba(21, 29, 19, 0.94) 0%, rgba(21, 29, 19, 0.78) 44%, rgba(21, 29, 19, 0.18) 100%),
+          linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.32)),
+          linear-gradient(180deg, transparent 66%, var(--cream) 100%),
+          url("img/header-mobile-banner-vertical-darkmode.jpg") 62% center / cover no-repeat;
       }
 
       .approach-card::before {
@@ -1253,6 +1675,10 @@
 
       .footer-details {
         text-align: left;
+      }
+
+      .footer-brand {
+        align-items: flex-start;
       }
     }
 
@@ -1275,9 +1701,13 @@
         font-size: 1.1rem;
       }
 
-      .hero-actions,
-      .button {
+      .hero-actions {
+        align-items: flex-start;
         width: 100%;
+      }
+
+      .hero-actions .button {
+        width: min(75vw, 270px);
       }
 
       .whatsapp-helper {
@@ -1310,6 +1740,20 @@
         border-radius: 24px;
       }
 
+      .footer-brand {
+        gap: 12px;
+      }
+
+      .footer-logo {
+        width: 46px;
+        height: 46px;
+      }
+
+      .footer-logo img {
+        width: 34px;
+        height: 34px;
+      }
+
       .floating-whatsapp {
         right: 16px;
         bottom: 16px;
@@ -1320,6 +1764,13 @@
       .floating-top {
         right: 19px;
         bottom: 84px;
+        width: 48px;
+        height: 48px;
+      }
+
+      .floating-theme {
+        right: 19px;
+        bottom: 146px;
         width: 48px;
         height: 48px;
       }
@@ -1341,6 +1792,21 @@
       }
 
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero::before,
+      .hero::after,
+      .hero-fireflies,
+      .firefly,
+      .firefly::before {
+        animation: none;
+        transition: none;
+      }
+
+      .hero-fireflies {
+        display: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1348,7 +1814,10 @@
     <header class="nav" aria-label="Primary navigation">
       <div class="container nav-inner">
         <a class="brand" href="#top" aria-label="Jasmine Learning home">
-          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-mark" aria-hidden="true">
+            <img class="brand-logo brand-logo-light" src="img/logolightmode.png" alt="">
+            <img class="brand-logo brand-logo-dusk" src="img/logoduskmode.png" alt="">
+          </span>
           <span>Jasmine Learning</span>
         </a>
         <button class="menu-toggle" type="button" id="menuToggle" aria-controls="primaryMenu" aria-expanded="false">
@@ -1367,6 +1836,18 @@
 
     <main id="top">
       <section class="hero">
+        <div class="hero-fireflies" aria-hidden="true">
+          <span class="firefly"></span>
+          <span class="firefly"></span>
+          <span class="firefly"></span>
+          <span class="firefly"></span>
+          <span class="firefly"></span>
+          <span class="firefly"></span>
+          <span class="firefly"></span>
+          <span class="firefly"></span>
+          <span class="firefly"></span>
+          <span class="firefly"></span>
+        </div>
         <div class="container hero-grid">
           <div class="hero-content">
             <h1 class="brand-hero-title">Jasmine Learning</h1>
@@ -1427,16 +1908,11 @@
             </article>
             <article class="card">
               <span class="card-number">02</span>
-              <h3>Hands-on Projects</h3>
-              <p>Every journey includes practical and creative work that children can build, present, and reflect on.</p>
+              <h3>Hands-on, Project-Based Learning</h3>
+              <p>Children explore big ideas through practical challenges, creative missions, teamwork, and final exhibitions they can build, present, and reflect on.</p>
             </article>
-            <article class="card">
+            <article class="card card-wide">
               <span class="card-number">03</span>
-              <h3>Project-Based Learning</h3>
-              <p>Children explore big ideas through challenges, missions, teamwork, and final exhibitions.</p>
-            </article>
-            <article class="card">
-              <span class="card-number">04</span>
               <h3>Calm, Community-Based Environment</h3>
               <p>The studio is intentionally warm, aesthetic, and organic because environment shapes how children feel and learn. Children collaborate, share ideas, support one another, and become part of a kind learning community.</p>
             </article>
@@ -1523,15 +1999,15 @@
           <div class="project-grid">
             <div class="detail-card">
               <strong>Dates</strong>
-              <span>8th to 28th June</span>
+              <span>June 15th - July 7th</span>
             </div>
             <div class="detail-card">
               <strong>Days</strong>
-              <span>Monday to Thursday</span>
+              <span>Monday &amp; Tuesday</span>
             </div>
             <div class="detail-card">
               <strong>Time</strong>
-              <span>To be decided after parent survey</span>
+              <span>4 pm to 6 pm</span>
             </div>
             <div class="detail-card">
               <strong>Age Group</strong>
@@ -1539,11 +2015,11 @@
             </div>
             <div class="detail-card">
               <strong>Fee</strong>
-              <span>Rs. 15,000</span>
+              <span>Rs. 12,000</span>
             </div>
             <div class="detail-card">
-              <strong>Early Bird Fee</strong>
-              <span>Rs. 11,500</span>
+              <strong>Location</strong>
+              <span>PCSIR Society</span>
             </div>
             <div class="detail-card">
               <strong>Format</strong>
@@ -1615,16 +2091,20 @@
               <p>Once payment is received and verified, your child's seat will be confirmed.</p>
               <div class="form-highlights" aria-label="Summer Projects summary">
                 <div class="form-highlight">
-                  <span>Age group</span>
-                  <span>8 to 12</span>
+                  <span>Date</span>
+                  <span>June 15th - July 7th</span>
                 </div>
                 <div class="form-highlight">
-                  <span>Early bird</span>
-                  <span>Rs. 11,500</span>
+                  <span>Days</span>
+                  <span>Monday &amp; Tuesday</span>
                 </div>
                 <div class="form-highlight">
-                  <span>Location</span>
-                  <span>PCSIR Society</span>
+                  <span>Time</span>
+                  <span>4 pm to 6 pm</span>
+                </div>
+                <div class="form-highlight">
+                  <span>Fee</span>
+                  <span>Rs. 12,000</span>
                 </div>
               </div>
               <p><strong>Phone:</strong> <a href="tel:+923084734673">0308-4734673</a></p>
@@ -1679,7 +2159,13 @@
     <footer class="footer">
       <div class="container footer-grid">
         <div>
-          <h2>Jasmine Learning</h2>
+          <div class="footer-brand">
+            <span class="footer-logo" aria-hidden="true">
+              <img class="brand-logo-light" src="img/logolightmode.png" alt="">
+              <img class="brand-logo-dusk" src="img/logoduskmode.png" alt="">
+            </span>
+            <h2>Jasmine Learning</h2>
+          </div>
           <p>A calm, community-based learning studio for curious children.</p>
           <p>Holistic learning. Kind community. Meaningful projects.</p>
         </div>
@@ -1691,6 +2177,22 @@
       </div>
     </footer>
   </div>
+  <button class="floating-theme" type="button" id="themeToggle" aria-label="Switch to dusk mode" aria-pressed="false">
+    <svg class="theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M21 13.4A8.5 8.5 0 0 1 10.6 3a7 7 0 1 0 10.4 10.4Z"></path>
+    </svg>
+    <svg class="theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M12 4V2"></path>
+      <path d="M12 22v-2"></path>
+      <path d="m4.93 4.93-1.41-1.41"></path>
+      <path d="m20.48 20.48-1.41-1.41"></path>
+      <path d="M4 12H2"></path>
+      <path d="M22 12h-2"></path>
+      <path d="m4.93 19.07-1.41 1.41"></path>
+      <path d="m20.48 3.52-1.41 1.41"></path>
+      <circle cx="12" cy="12" r="4"></circle>
+    </svg>
+  </button>
   <a class="floating-top" href="#top" aria-label="Back to top">
     <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
       <path d="M12 19V5"></path>
@@ -1708,6 +2210,25 @@
       var menuToggle = document.getElementById("menuToggle");
       var primaryMenu = document.getElementById("primaryMenu");
       var whatsappButton = document.getElementById("whatsappEnrollment");
+      var themeToggle = document.getElementById("themeToggle");
+      var root = document.documentElement;
+
+      function setTheme(theme) {
+        var isDark = theme === "dark";
+        root.setAttribute("data-theme", isDark ? "dark" : "light");
+
+        if (themeToggle) {
+          themeToggle.setAttribute("aria-pressed", isDark ? "true" : "false");
+          themeToggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dusk mode");
+        }
+      }
+
+      try {
+        var savedTheme = localStorage.getItem("jasmine-theme");
+        setTheme(savedTheme || "light");
+      } catch (error) {
+        setTheme("light");
+      }
 
       if (nav && menuToggle && primaryMenu) {
         menuToggle.addEventListener("click", function () {
@@ -1750,6 +2271,18 @@
 
           var whatsappUrl = "https://wa.me/923084734673?text=" + encodeURIComponent(messageLines.join("\n"));
           window.open(whatsappUrl, "_blank", "noopener");
+        });
+      }
+
+      if (themeToggle) {
+        themeToggle.addEventListener("click", function () {
+          var nextTheme = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+          setTheme(nextTheme);
+
+          try {
+            localStorage.setItem("jasmine-theme", nextTheme);
+          } catch (error) {
+          }
         });
       }
     });
