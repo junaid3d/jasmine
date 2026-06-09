@@ -6,7 +6,7 @@
 
 At **Jasmine Learning**, children learn through thoughtful questions, meaningful projects, hands-on discovery, and gentle guidance.
 
-We are a calm and organic learning space for children aged **3 to 12**, offering project-based programmes inspired by the **Acton Quest model**, where learners explore big ideas through **Socratic discussions, creative expression, teamwork, and real-world challenges**.
+We are a calm and organic learning space for children aged **3 to 12**, offering project-based programmes inspired by **Acton-style project journeys**, where learners explore big ideas through **Socratic discussions, creative expression, teamwork, and real-world challenges**.
 
 Our goal is simple:
 
@@ -42,9 +42,9 @@ Children are encouraged to think, question, listen, and respond. Instead of bein
 
 Every learning journey includes practical, creative, and meaningful projects that children can build, present, and reflect on.
 
-### Quest-Based Learning
+### Project-Based Learning
 
-Our programmes are built like learning adventures. Each quest has a theme, a big question, challenges, missions, reflections, and a final expression of learning.
+Our programmes are built like learning adventures. Each project has a theme, a big question, challenges, missions, reflections, and a final expression of learning.
 
 ### A Calm Organic Environment
 
@@ -68,7 +68,7 @@ Gentle, playful, sensory-rich learning experiences for younger children. These p
 
 **Ages 8 to 12**
 
-Project-based quests for older children who are ready for deeper discussions, teamwork, problem-solving, research, creative projects, and meaningful reflection.
+Project-based journeys for older children who are ready for deeper discussions, teamwork, problem-solving, research, creative projects, and meaningful reflection.
 
 ---
 
@@ -97,7 +97,7 @@ The aim is to help them become more thoughtful, confident, kind, and capable.
 
 ---
 
-# Featured Summer Quest
+# Featured Summer Projects
 
 ## This Summer: Build Resilience
 
@@ -107,7 +107,7 @@ The aim is to help them become more thoughtful, confident, kind, and capable.
 
 **Grow. Create. Inspire.**
 
-This summer quest is designed to help children explore emotional resilience through story, discussion, creativity, and hands-on projects.
+These summer projects are designed to help children explore emotional resilience through story, discussion, creativity, and hands-on projects.
 
 Children will learn how hope, gratitude, kindness, and self-expression can help us move through difficult feelings and challenging moments.
 
@@ -125,7 +125,7 @@ Children will learn how hope, gratitude, kindness, and self-expression can help 
 
 ---
 
-## Quest details
+## Project details
 
 **Dates:** 8th to 28th June
 **Days:** Monday to Thursday
@@ -133,7 +133,7 @@ Children will learn how hope, gratitude, kindness, and self-expression can help 
 **Age Group:** 8 to 12 years
 **Fee:** Rs. 15,000
 **Early Bird Fee:** Rs. 11,500
-**Location:** PCSIR Society
+**Format:** In-person studio learning
 **Phone:** 0308-4734673
 
 **Conducted by:**
@@ -142,11 +142,11 @@ Project-Based Learning Instructor at a renowned American school
 
 ---
 
-## Why this quest matters
+## Why these projects matter
 
 Children today are surrounded by pressure, comparison, screens, and fast-paced expectations.
 
-This quest gives them a slower and more meaningful space to pause, think, create, and understand themselves.
+These projects give them a slower and more meaningful space to pause, think, create, and understand themselves.
 
 Through stories, guided discussions, art, and project work, children will explore one central question:
 
@@ -267,7 +267,7 @@ Use one of these buttons:
 **Reserve a Seat**
 **Start Enrollment**
 **Pay Now**
-**Join the Summer Quest**
+**Explore Summer Projects**
 
 For the final form button, use:
 
@@ -287,7 +287,7 @@ Use this if you want a tighter first-screen hero section:
 
 A community-based holistic and constructivist learning space for children aged 3 to 12.
 
-Through Socratic discussions, hands-on projects, creative expression, and quest-based learning, children explore big ideas in a calm, kind, and organic environment.
+Through Socratic discussions, hands-on projects, creative expression, and project-based learning, children explore big ideas in a calm, kind, and organic environment.
 
 **Grow with curiosity. Learn with kindness. Create with purpose.**
 
@@ -302,7 +302,7 @@ Button: **Enroll Now**
 3. What makes us different
 4. Our learning approach
 5. Age groups
-6. Featured Summer Quest
+6. Featured Summer Projects
 7. Philosophy / “The sun is not only for a few”
 8. Parent benefits
 9. Enrollment form

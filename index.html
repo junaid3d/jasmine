@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Jasmine Learning is a calm, community-based holistic and constructivist learning studio for children aged 3 to 12 in PCSIR Society.">
+  <meta name="description" content="Jasmine Learning is a calm, community-based holistic and constructivist learning studio for children aged 3 to 12.">
   <title>Jasmine Learning | Calm, Curious Learning for Children</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -705,7 +705,7 @@
     }
 
     .age-grid,
-    .quest-grid,
+    .project-grid,
     .parent-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -733,7 +733,7 @@
       font-weight: 800;
     }
 
-    .quest {
+    .projects {
       position: relative;
       overflow: hidden;
       background:
@@ -743,7 +743,7 @@
       color: var(--jasmine);
     }
 
-    .quest::before {
+    .projects::before {
       content: "";
       position: absolute;
       inset: 28px auto auto 6%;
@@ -754,18 +754,18 @@
       transform: rotate(-24deg);
     }
 
-    .quest h2,
-    .quest h3,
-    .quest p,
-    .quest .eyebrow {
+    .projects h2,
+    .projects h3,
+    .projects p,
+    .projects .eyebrow {
       color: var(--jasmine);
     }
 
-    .quest .eyebrow::before {
+    .projects .eyebrow::before {
       background: var(--clay-soft);
     }
 
-    .quest-card,
+    .project-card,
     .detail-card {
       border: 1px solid rgba(255, 253, 247, 0.2);
       border-radius: 30px;
@@ -774,11 +774,11 @@
       box-shadow: inset 0 1px 0 rgba(255, 253, 246, 0.12);
     }
 
-    .quest-card {
+    .project-card {
       padding: clamp(28px, 4vw, 42px);
     }
 
-    .quest-card p {
+    .project-card p {
       margin-top: 18px;
       color: rgba(255, 253, 247, 0.82);
     }
@@ -1266,7 +1266,7 @@
 
       .stats,
       .age-grid,
-      .quest-grid,
+      .project-grid,
       .parent-grid,
       .field-grid,
       .cards-grid {
@@ -1280,7 +1280,7 @@
       .hero-card,
       .card,
       .age-card,
-      .quest-card,
+      .project-card,
       .parent-card,
       .form-aside {
         padding: 24px;
@@ -1313,7 +1313,7 @@
         <nav class="nav-links" id="primaryMenu" aria-label="Page sections">
           <a href="#about">About</a>
           <a href="#approach">Approach</a>
-          <a href="#quest">Summer Quest</a>
+          <a href="#projects">Summer Projects</a>
           <a href="#parents">For Parents</a>
           <a href="#enroll">Enroll</a>
         </nav>
@@ -1326,19 +1326,19 @@
           <div>
             <p class="eyebrow">Holistic. Constructivist. Community-based.</p>
             <h1>A calm, curious learning studio for children.</h1>
-            <p class="hero-copy">Jasmine Learning is a warm, project-based learning space for children aged 3 to 12. Through Socratic discussions, hands-on quests, creative expression, and real-world challenges, children grow with curiosity, kindness, and purpose.</p>
+            <p class="hero-copy">Jasmine Learning is a warm, project-based learning space for children aged 3 to 12. Through Socratic discussions, hands-on projects, creative expression, and real-world challenges, children grow with curiosity, kindness, and purpose.</p>
             <div class="hero-actions">
               <a class="button button-primary" href="#enroll">Enroll Now</a>
-              <a class="button button-secondary" href="#quest">Join the Summer Quest</a>
+              <a class="button button-secondary" href="#projects">Explore Summer Projects</a>
             </div>
             <div class="hero-note" aria-label="Jasmine Learning quick details">
               <span>Ages 3 to 12</span>
-              <span>PCSIR Society</span>
-              <span>Project-based quests</span>
+              <span>Community studio</span>
+              <span>Project-based journeys</span>
             </div>
           </div>
           <aside class="hero-card" aria-label="Jasmine Learning highlights">
-            <p class="eyebrow">PCSIR Society</p>
+            <p class="eyebrow">A calm learning studio</p>
             <h2>Grow gently. Think deeply. Create bravely.</h2>
             <p class="quote">A slower, kinder space where children feel safe, seen, and inspired.</p>
             <ul class="hero-card-list">
@@ -1411,7 +1411,7 @@
             </article>
             <article class="card">
               <span class="card-number">03</span>
-              <h3>Quest-Based Learning</h3>
+              <h3>Project-Based Learning</h3>
               <p>Children explore big ideas through challenges, missions, teamwork, and final exhibitions.</p>
             </article>
             <article class="card">
@@ -1469,45 +1469,45 @@
             <article class="age-card">
               <span class="age-label">Ages 8 to 12</span>
               <h3>Independent Learners</h3>
-              <p>Project-based quests for older children who are ready for deeper discussions, teamwork, problem-solving, research, creative projects, and meaningful reflection.</p>
+              <p>Project-based journeys for older children who are ready for deeper discussions, teamwork, problem-solving, research, creative projects, and meaningful reflection.</p>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="section quest" id="quest">
+      <section class="section projects" id="projects">
         <div class="container">
           <div class="section-head">
             <div>
-              <p class="eyebrow">Featured Summer Quest</p>
+              <p class="eyebrow">Featured Summer Projects</p>
               <h2>The Light after the Dark</h2>
             </div>
             <p>A project-based learning journey designed to help children explore emotional resilience through story, discussion, creativity, and hands-on projects.</p>
           </div>
-          <div class="quest-grid">
-            <article class="quest-card">
+          <div class="project-grid">
+            <article class="project-card">
               <h3>This Summer: Build Resilience</h3>
               <p>Children will learn how hope, gratitude, kindness, and self-expression can help us move through difficult feelings and challenging moments.</p>
               <p><strong>Grow. Create. Inspire.</strong></p>
             </article>
-            <article class="quest-card">
-              <h3>Why this quest matters</h3>
-              <p>Children today are surrounded by pressure, comparison, screens, and fast-paced expectations. This quest gives them a slower and more meaningful space to pause, think, create, and understand themselves.</p>
+            <article class="project-card">
+              <h3>Why these projects matter</h3>
+              <p>Children today are surrounded by pressure, comparison, screens, and fast-paced expectations. These projects give them a slower and more meaningful space to pause, think, create, and understand themselves.</p>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="section quest" id="quest-details">
+      <section class="section projects" id="project-details">
         <div class="container">
           <div class="section-head">
             <div>
-              <p class="eyebrow">Quest Details</p>
+              <p class="eyebrow">Project Details</p>
               <h2>Everything parents need to know.</h2>
             </div>
             <p>Through stories, guided discussions, art, and project work, children explore how hope, gratitude, and kindness can bring light into difficult moments.</p>
           </div>
-          <div class="quest-grid">
+          <div class="project-grid">
             <div class="detail-card">
               <strong>Dates</strong>
               <span>8th to 28th June</span>
@@ -1533,8 +1533,8 @@
               <span>Rs. 11,500</span>
             </div>
             <div class="detail-card">
-              <strong>Location</strong>
-              <span>PCSIR Society</span>
+              <strong>Format</strong>
+              <span>In-person studio learning</span>
             </div>
             <div class="detail-card">
               <strong>Conducted by</strong>
@@ -1612,9 +1612,9 @@
           </div>
           <div class="form-wrap">
             <aside class="form-aside">
-              <h3>Summer Quest Enrollment</h3>
+              <h3>Summer Projects Enrollment</h3>
               <p>Once payment is received and verified, your child's seat will be confirmed.</p>
-              <div class="form-highlights" aria-label="Summer Quest summary">
+              <div class="form-highlights" aria-label="Summer Projects summary">
                 <div class="form-highlight">
                   <span>Age group</span>
                   <span>8 to 12</span>
