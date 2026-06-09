@@ -257,24 +257,68 @@
       min-height: calc(100dvh - 76px);
       display: grid;
       align-items: center;
-      padding: 68px 0 46px;
+      padding: clamp(72px, 11vw, 128px) 0 clamp(76px, 10vw, 118px);
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(246, 239, 226, 0.96) 0%, rgba(246, 239, 226, 0.86) 26%, rgba(246, 239, 226, 0.34) 58%, rgba(246, 239, 226, 0.08) 100%),
+        linear-gradient(180deg, rgba(44, 56, 38, 0.08), rgba(44, 56, 38, 0.1)),
+        url("img/header.jpg") center right / cover no-repeat;
     }
 
     .hero::before {
       content: "";
       position: absolute;
-      left: max(18px, calc((100vw - 1180px) / 2));
-      bottom: 18px;
-      width: min(520px, 44vw);
-      height: 1px;
-      background: linear-gradient(90deg, rgba(197, 139, 106, 0.65), transparent);
+      inset: auto 0 0;
+      height: 34%;
+      background: linear-gradient(180deg, transparent, var(--cream));
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: -11vw;
+      top: 12%;
+      width: 48vw;
+      height: 48vw;
+      min-width: 360px;
+      min-height: 360px;
+      border: 1px solid rgba(115, 128, 94, 0.12);
+      border-radius: 52% 48% 44% 56%;
+      background: rgba(255, 253, 246, 0.18);
+      transform: rotate(-16deg);
+      pointer-events: none;
     }
 
     .hero-grid {
+      position: relative;
+      z-index: 1;
       display: grid;
-      grid-template-columns: minmax(0, 1.18fr) minmax(330px, 0.72fr);
-      gap: clamp(34px, 6vw, 78px);
-      align-items: center;
+      grid-template-columns: minmax(0, 0.68fr) minmax(240px, 0.32fr);
+      align-items: end;
+    }
+
+    .hero-content {
+      max-width: 760px;
+    }
+
+    .brand-hero-title {
+      max-width: 820px;
+      font-size: clamp(5rem, 12vw, 11.4rem);
+      line-height: 0.82;
+      letter-spacing: 0;
+      color: var(--olive);
+      text-shadow: 0 2px 28px rgba(255, 253, 246, 0.64);
+    }
+
+    .hero-tagline {
+      max-width: 610px;
+      margin-top: clamp(20px, 3vw, 32px);
+      color: var(--olive);
+      font-size: clamp(1.18rem, 2vw, 1.62rem);
+      font-weight: 800;
+      line-height: 1.45;
+      text-wrap: balance;
     }
 
     .eyebrow {
@@ -406,6 +450,22 @@
       transform: rotate(-35deg);
     }
 
+    .hero-intro {
+      padding-top: 92px;
+    }
+
+    .hero-intro-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.72fr);
+      gap: clamp(34px, 6vw, 80px);
+      align-items: center;
+    }
+
+    .hero-intro-copy h1 {
+      max-width: 820px;
+      font-size: clamp(3.15rem, 7vw, 6.7rem);
+    }
+
     .hero-card {
       position: relative;
       padding: 38px;
@@ -475,38 +535,6 @@
       border-radius: 65% 35% 65% 35%;
       background: var(--sage);
       transform: rotate(22deg);
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 30px;
-    }
-
-    .stat {
-      min-height: 106px;
-      padding: 18px 16px;
-      border: 1px solid rgba(47, 58, 39, 0.1);
-      border-radius: 22px;
-      background: rgba(246, 239, 226, 0.72);
-    }
-
-    .stat strong {
-      display: block;
-      color: var(--olive);
-      font-family: var(--serif);
-      font-size: 2rem;
-      line-height: 1;
-    }
-
-    .stat span {
-      display: block;
-      margin-top: 8px;
-      color: var(--olive-soft);
-      font-size: 0.84rem;
-      font-weight: 600;
-      line-height: 1.35;
     }
 
     .section-head {
@@ -648,7 +676,7 @@
 
     .approach-grid {
       display: grid;
-      grid-template-columns: 0.82fr 1fr;
+      grid-template-columns: minmax(0, 0.92fr) minmax(220px, 0.38fr);
       gap: 30px;
       align-items: stretch;
     }
@@ -683,25 +711,6 @@
     .approach-text p {
       margin-top: 20px;
       opacity: 0.84;
-    }
-
-    .pill-grid {
-      display: flex;
-      flex-wrap: wrap;
-      align-content: start;
-      gap: 13px;
-      padding: 12px 6px;
-    }
-
-    .pill {
-      padding: 12px 16px;
-      border: 1px solid rgba(47, 58, 39, 0.12);
-      border-radius: 999px;
-      background: rgba(255, 253, 246, 0.74);
-      color: var(--olive);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.52);
-      font-weight: 800;
-      font-size: 0.91rem;
     }
 
     .age-grid,
@@ -888,37 +897,6 @@
 
     .not-card {
       background: linear-gradient(145deg, rgba(237, 213, 195, 0.54), rgba(255, 253, 246, 0.68));
-    }
-
-    .conversion-strip {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-top: 24px;
-    }
-
-    .conversion-step {
-      padding: 18px;
-      border: 1px solid rgba(44, 56, 38, 0.11);
-      border-radius: 22px;
-      background: rgba(255, 253, 246, 0.64);
-    }
-
-    .conversion-step strong {
-      display: block;
-      color: var(--olive);
-      font-family: var(--serif);
-      font-size: 1.45rem;
-      line-height: 1;
-    }
-
-    .conversion-step span {
-      display: block;
-      margin-top: 9px;
-      color: var(--olive-soft);
-      font-size: 0.9rem;
-      font-weight: 800;
-      line-height: 1.4;
     }
 
     .enroll {
@@ -1211,12 +1189,8 @@
         border-color: transparent;
       }
 
-      .hero {
-        min-height: auto;
-        padding-top: 54px;
-      }
-
       .hero-grid,
+      .hero-intro-grid,
       .section-head,
       .about-panel,
       .approach-grid,
@@ -1225,16 +1199,21 @@
         grid-template-columns: 1fr;
       }
 
+      .hero {
+        min-height: 78dvh;
+        padding: 96px 0 74px;
+        background:
+          linear-gradient(90deg, rgba(246, 239, 226, 0.96) 0%, rgba(246, 239, 226, 0.82) 44%, rgba(246, 239, 226, 0.2) 100%),
+          linear-gradient(180deg, rgba(44, 56, 38, 0.04), rgba(44, 56, 38, 0.14)),
+          url("img/header.jpg") 62% center / cover no-repeat;
+      }
+
       .hero-card::before {
         right: -26px;
       }
 
       .section {
         padding: 68px 0;
-      }
-
-      .conversion-strip {
-        grid-template-columns: 1fr;
       }
 
       .footer-details {
@@ -1251,6 +1230,15 @@
         font-size: clamp(3.1rem, 17vw, 4.8rem);
       }
 
+      .brand-hero-title {
+        font-size: clamp(4.35rem, 21vw, 7rem);
+      }
+
+      .hero-tagline {
+        max-width: 18rem;
+        font-size: 1.1rem;
+      }
+
       .hero-actions,
       .button {
         width: 100%;
@@ -1264,7 +1252,6 @@
         width: 100%;
       }
 
-      .stats,
       .age-grid,
       .project-grid,
       .parent-grid,
@@ -1291,10 +1278,6 @@
         border-radius: 24px;
       }
 
-      .pill {
-        width: 100%;
-        border-radius: 16px;
-      }
     }
   </style>
 </head>
@@ -1323,14 +1306,23 @@
     <main id="top">
       <section class="hero">
         <div class="container hero-grid">
-          <div>
-            <p class="eyebrow">Holistic. Constructivist. Community-based.</p>
-            <h1>A calm, curious learning studio for children.</h1>
-            <p class="hero-copy">Jasmine Learning is a warm, project-based learning space for children aged 3 to 12. Through Socratic discussions, hands-on projects, creative expression, and real-world challenges, children grow with curiosity, kindness, and purpose.</p>
+          <div class="hero-content">
+            <h1 class="brand-hero-title">Jasmine Learning</h1>
+            <p class="hero-tagline">A calm, curious &amp; organic learning studio for children</p>
             <div class="hero-actions">
               <a class="button button-primary" href="#enroll">Enroll Now</a>
               <a class="button button-secondary" href="#projects">Explore Summer Projects</a>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section hero-intro" aria-label="Jasmine Learning introduction">
+        <div class="container hero-intro-grid">
+          <div class="hero-intro-copy">
+            <p class="eyebrow">Holistic. Constructivist. Community-based.</p>
+            <h1>A calm, curious learning studio for children.</h1>
+            <p class="hero-copy">Jasmine Learning is a warm, project-based learning space for children aged 3 to 12. Through Socratic discussions, hands-on projects, creative expression, and real-world challenges, children grow with curiosity, kindness, and purpose.</p>
             <div class="hero-note" aria-label="Jasmine Learning quick details">
               <span>Ages 3 to 12</span>
               <span>Community studio</span>
@@ -1346,20 +1338,6 @@
               <li>Hands-on missions that turn ideas into visible work.</li>
               <li>A community rhythm built around confidence, kindness, and reflection.</li>
             </ul>
-            <div class="stats" aria-label="Program details">
-              <div class="stat">
-                <strong>3-12</strong>
-                <span>Years old</span>
-              </div>
-              <div class="stat">
-                <strong>2</strong>
-                <span>Age groups</span>
-              </div>
-              <div class="stat">
-                <strong>1</strong>
-                <span>Kind community</span>
-              </div>
-            </div>
           </aside>
         </div>
       </section>
@@ -1435,18 +1413,6 @@
             <h2>Holistic constructivist learning.</h2>
             <p>Children do not simply receive information. They actively build understanding through experience, conversation, observation, creativity, and reflection.</p>
             <p>The aim is not just to help children learn more. The aim is to help them become more thoughtful, confident, kind, and capable.</p>
-          </div>
-          <div class="pill-grid" aria-label="Learning methods">
-            <span class="pill">Socratic discussions</span>
-            <span class="pill">Story-based learning</span>
-            <span class="pill">Hands-on projects</span>
-            <span class="pill">Art and creative expression</span>
-            <span class="pill">Team missions</span>
-            <span class="pill">Research-based challenges</span>
-            <span class="pill">Reflection circles</span>
-            <span class="pill">Exhibitions and presentations</span>
-            <span class="pill">Real-world problem-solving</span>
-            <span class="pill">Social and emotional development</span>
           </div>
         </div>
       </section>
@@ -1583,20 +1549,6 @@
               <p>This is not a tuition centre. This is not a test-preparation programme.</p>
               <p>This is a learning community designed to help children think, create, reflect, and grow in a calm, non-pressurised environment.</p>
             </article>
-          </div>
-          <div class="conversion-strip" aria-label="Enrollment steps">
-            <div class="conversion-step">
-              <strong>01</strong>
-              <span>Share your child's details.</span>
-            </div>
-            <div class="conversion-step">
-              <strong>02</strong>
-              <span>Receive bank transfer details.</span>
-            </div>
-            <div class="conversion-step">
-              <strong>03</strong>
-              <span>Confirm the seat after verification.</span>
-            </div>
           </div>
         </div>
       </section>
