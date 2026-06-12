@@ -16,6 +16,69 @@ function clean_email($value) {
     return filter_var($value, FILTER_SANITIZE_EMAIL);
 }
 
+function normalize_phone($value) {
+    return preg_replace('/[\s\-\(\)\.]/', '', (string) $value);
+}
+
+function is_valid_local_mobile($value) {
+    return preg_match('/^03\d{9}$/', normalize_phone($value)) === 1;
+}
+
+function normalize_spam_text($value) {
+    $value = strtolower((string) $value);
+    $value = strtr($value, array(
+        '0' => 'o',
+        '3' => 'e',
+        '$' => 's',
+        '5' => 's',
+        '!' => 'i',
+        '1' => 'i',
+        '|' => 'i',
+        '@' => 'a'
+    ));
+    return preg_replace('/[^a-z0-9]+/', '', $value);
+}
+
+function has_spam_content($value) {
+    $raw = strtolower((string) $value);
+    $compact = normalize_spam_text($value);
+    $url_pattern = '/(https?:\/\/|www\.|[a-z0-9-]+\.(com|net|org|io|co|live|site|info|biz)\b)/i';
+    $phrase_pattern = '/(price\s*list|action\s*plan|complete\s*seo|place\s+your\s+website|reviewing\s+your\s+website|qualified\s+traffic|online\s+search\s+results)/i';
+    $compact_patterns = array(
+        'seo',
+        'searchengineoptimization',
+        'googlefirstpage',
+        'googleistpage',
+        'firstpage',
+        'istpage',
+        'rankyourwebsite',
+        'ranking',
+        'searchvisibility',
+        'organictraffic',
+        'websitetraffic',
+        'backlinks',
+        'domainauthority',
+        'seopackages',
+        'seoproposal',
+        'seopricing',
+        'searchindex',
+        'googlesearchindex',
+        'searchresults'
+    );
+
+    if (preg_match($url_pattern, $raw) === 1 || preg_match($phrase_pattern, $raw) === 1) {
+        return true;
+    }
+
+    foreach ($compact_patterns as $pattern) {
+        if (strpos($compact, $pattern) !== false) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 function render_page($title, $message, $is_success = true) {
     $accent = $is_success ? '#73805f' : '#a05d4b';
     echo '<!DOCTYPE html>';
@@ -55,15 +118,33 @@ $phone_number = clean_text(isset($_POST['phone']) ? $_POST['phone'] : '');
 $email = clean_email(isset($_POST['email']) ? $_POST['email'] : '');
 $constructivist = clean_text(isset($_POST['constructivist_familiarity']) ? $_POST['constructivist_familiarity'] : '');
 $expectations = clean_text(isset($_POST['expectations']) ? $_POST['expectations'] : '');
+$medical_notes = clean_text(isset($_POST['medical_notes']) ? $_POST['medical_notes'] : '');
+$support_needs = clean_text(isset($_POST['support_needs']) ? $_POST['support_needs'] : '');
+$referral_name = clean_text(isset($_POST['referral_name']) ? $_POST['referral_name'] : '');
+$referral_contact = clean_text(isset($_POST['referral_contact']) ? $_POST['referral_contact'] : '');
+$community_disclaimer = isset($_POST['community_disclaimer']) ? clean_text($_POST['community_disclaimer']) : '';
 
-if ($parent_name === '' || $child_name === '' || $child_age === '' || $phone_number === '' || $email === '' || $expectations === '') {
+if ($parent_name === '' || $child_name === '' || $child_age === '' || $phone_number === '' || $email === '' || $expectations === '' || $medical_notes === '' || $support_needs === '' || $referral_name === '' || $referral_contact === '' || $community_disclaimer !== 'accepted') {
     render_page('Missing Details', 'Please complete the required enrollment details and try again.', false);
+    exit;
+}
+
+if (!is_valid_local_mobile($phone_number)) {
+    render_page('Invalid number', 'Invalid number', false);
     exit;
 }
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     render_page('Invalid Email', 'Please enter a valid email address and submit the form again.', false);
     exit;
+}
+
+$spam_check_values = array($parent_name, $child_name, $expectations, $medical_notes, $support_needs, $referral_name, $referral_contact);
+foreach ($spam_check_values as $spam_check_value) {
+    if (has_spam_content(htmlspecialchars_decode($spam_check_value, ENT_QUOTES))) {
+        render_page('Thank you.', 'Your enrollment request has been received. Bank transfer details will be shared with you shortly.', true);
+        exit;
+    }
 }
 
 $allowed_familiarity = array('Yes', 'No', 'A little');
@@ -83,6 +164,16 @@ $body_lines = array(
     '',
     'Expectations:',
     htmlspecialchars_decode($expectations, ENT_QUOTES),
+    '',
+    'Allergies, medical conditions, or sensitivities:',
+    htmlspecialchars_decode($medical_notes, ENT_QUOTES),
+    '',
+    'Emotional, behavioral, learning, or social needs:',
+    htmlspecialchars_decode($support_needs, ENT_QUOTES),
+    '',
+    'Referral Name: ' . htmlspecialchars_decode($referral_name, ENT_QUOTES),
+    'Referral Contact #: ' . htmlspecialchars_decode($referral_contact, ENT_QUOTES),
+    'Community Disclaimer: Accepted',
     '',
     'Submitted from jasminelearning.com'
 );

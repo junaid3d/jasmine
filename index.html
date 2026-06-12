@@ -1148,6 +1148,10 @@
       min-height: 2.75rem;
     }
 
+    .field-grid > .compact label {
+      min-height: auto;
+    }
+
     input,
     select,
     textarea {
@@ -1187,6 +1191,34 @@
       background: rgba(var(--sage-soft-rgb), 0.55);
       color: var(--olive-soft);
       font-size: 0.93rem;
+      font-weight: 700;
+    }
+
+    .disclaimer-field {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+      padding: 16px 18px;
+      border: 1px solid rgba(var(--olive-rgb), 0.08);
+      border-radius: 20px;
+      background: rgba(var(--sage-soft-rgb), 0.46);
+    }
+
+    .disclaimer-field input {
+      width: 18px;
+      height: 18px;
+      margin-top: 3px;
+      padding: 0;
+      accent-color: var(--moss);
+    }
+
+    .disclaimer-field label {
+      min-height: auto;
+      margin: 0;
+      color: var(--olive-soft);
+      font-size: 0.91rem;
+      line-height: 1.55;
       font-weight: 700;
     }
 
@@ -1537,6 +1569,7 @@
       align-items: center;
       gap: 14px;
       margin-bottom: 4px;
+      max-width: 100%;
     }
 
     .footer-logo {
@@ -1572,7 +1605,9 @@
 
     .footer h2 {
       color: var(--jasmine);
-      font-size: 2.4rem;
+      font-size: clamp(1.8rem, 5vw, 2.4rem);
+      line-height: 1;
+      white-space: nowrap;
     }
 
     .footer p,
@@ -1774,13 +1809,17 @@
       }
 
       .footer-logo {
-        width: 46px;
-        height: 46px;
+        width: 42px;
+        height: 42px;
       }
 
       .footer-logo img {
-        width: 34px;
-        height: 34px;
+        width: 31px;
+        height: 31px;
+      }
+
+      .footer h2 {
+        font-size: clamp(1.6rem, 9vw, 2.05rem);
       }
 
       .floating-whatsapp {
@@ -2144,19 +2183,19 @@
                   <label for="parentName">Parent/Guardian Name</label>
                   <input type="text" id="parentName" name="parent_name" autocomplete="name" required>
                 </div>
-                <div>
+                <div class="compact">
                   <label for="childName">Child's Name</label>
                   <input type="text" id="childName" name="child_name" required>
                 </div>
-                <div>
+                <div class="compact">
                   <label for="childAge">Child's Age</label>
                   <input type="number" id="childAge" name="child_age" min="3" max="12" required>
                 </div>
-                <div>
+                <div class="compact">
                   <label for="phone">Phone Number</label>
-                  <input type="tel" id="phone" name="phone" autocomplete="tel" required>
+                  <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="numeric" required>
                 </div>
-                <div>
+                <div class="compact">
                   <label for="email">Email Address</label>
                   <input type="email" id="email" name="email" autocomplete="email" required>
                 </div>
@@ -2172,6 +2211,26 @@
                 <div class="full">
                   <label for="expectations">What do you expect your child to learn from this course?</label>
                   <textarea id="expectations" name="expectations" required></textarea>
+                </div>
+                <div class="full">
+                  <label for="medicalNotes">Does your child have any allergies, medical conditions, or sensitivities we should know about?</label>
+                  <textarea id="medicalNotes" name="medical_notes" required></textarea>
+                </div>
+                <div class="full">
+                  <label for="supportNeeds">Is there anything about your child's emotional, behavioral, learning, or social needs that requires special attention?</label>
+                  <textarea id="supportNeeds" name="support_needs" required></textarea>
+                </div>
+                <div class="compact">
+                  <label for="referralName">Referral name</label>
+                  <input type="text" id="referralName" name="referral_name" required>
+                </div>
+                <div class="compact">
+                  <label for="referralContact">Referral contact #</label>
+                  <input type="tel" id="referralContact" name="referral_contact" autocomplete="tel" inputmode="numeric" required>
+                </div>
+                <div class="full disclaimer-field">
+                  <input type="checkbox" id="communityDisclaimer" name="community_disclaimer" value="accepted" required>
+                  <label for="communityDisclaimer">I understand that Jasmine Learning is a respectful community learning space. If my child repeatedly behaves in a way that is unsafe, aggressive, physically harmful, verbally hurtful, or seriously disruptive, the instructor may contact me to discuss support steps. If the behavior continues or affects the safety of others, Jasmine Learning may pause or discontinue my child's participation in the programme.</label>
                 </div>
               </div>
               <button class="button button-primary" type="submit">Submit</button>
@@ -2237,7 +2296,60 @@
       var primaryMenu = document.getElementById("primaryMenu");
       var whatsappButton = document.getElementById("whatsappEnrollment");
       var themeToggle = document.getElementById("themeToggle");
+      var enrollmentForm = document.getElementById("enrollmentForm");
+      var phoneInput = document.getElementById("phone");
       var root = document.documentElement;
+
+      function normalizePhone(value) {
+        return (value || "").replace(/[\s\-().]/g, "");
+      }
+
+      function isValidLocalMobile(value) {
+        return /^03\d{9}$/.test(normalizePhone(value));
+      }
+
+      function normalizeSpamText(value) {
+        return (value || "")
+          .toLowerCase()
+          .replace(/[0]/g, "o")
+          .replace(/[3]/g, "e")
+          .replace(/[$5]/g, "s")
+          .replace(/[!1|]/g, "i")
+          .replace(/[@]/g, "a")
+          .replace(/[^a-z0-9]+/g, "");
+      }
+
+      function hasSpamContent(value) {
+        var raw = (value || "").toLowerCase();
+        var compact = normalizeSpamText(value);
+        var urlPattern = /(https?:\/\/|www\.|[a-z0-9-]+\.(com|net|org|io|co|live|site|info|biz)\b)/i;
+        var compactPatterns = [
+          "seo",
+          "searchengineoptimization",
+          "googlefirstpage",
+          "googleistpage",
+          "firstpage",
+          "istpage",
+          "rankyourwebsite",
+          "ranking",
+          "searchvisibility",
+          "organictraffic",
+          "websitetraffic",
+          "backlinks",
+          "domainauthority",
+          "seopackages",
+          "seoproposal",
+          "seopricing",
+          "searchindex",
+          "googlesearchindex",
+          "searchresults"
+        ];
+        var phrasePattern = /(price\s*list|action\s*plan|complete\s*seo|place\s+your\s+website|reviewing\s+your\s+website|qualified\s+traffic|online\s+search\s+results)/i;
+
+        return urlPattern.test(raw) || phrasePattern.test(raw) || compactPatterns.some(function (pattern) {
+          return compact.indexOf(pattern) !== -1;
+        });
+      }
 
       function setTheme(theme) {
         var isDark = theme === "dark";
@@ -2279,7 +2391,11 @@
             { label: "Phone Number", id: "phone" },
             { label: "Email Address", id: "email" },
             { label: "Familiarity with constructivist education", id: "constructivist" },
-            { label: "Expectations from the course", id: "expectations" }
+            { label: "Expectations from the course", id: "expectations" },
+            { label: "Allergies, medical conditions, or sensitivities", id: "medicalNotes" },
+            { label: "Emotional, behavioral, learning, or social needs", id: "supportNeeds" },
+            { label: "Referral name", id: "referralName" },
+            { label: "Referral contact", id: "referralContact" }
           ];
 
           var messageLines = [
@@ -2297,6 +2413,50 @@
 
           var whatsappUrl = "https://wa.me/923084734673?text=" + encodeURIComponent(messageLines.join("\n"));
           window.open(whatsappUrl, "_blank", "noopener");
+        });
+      }
+
+      if (phoneInput) {
+        phoneInput.addEventListener("input", function () {
+          phoneInput.setCustomValidity("");
+        });
+      }
+
+      if (enrollmentForm) {
+        ["expectations", "medicalNotes", "supportNeeds", "referralName"].forEach(function (fieldId) {
+          var field = document.getElementById(fieldId);
+
+          if (field) {
+            field.addEventListener("input", function () {
+              field.setCustomValidity("");
+            });
+          }
+        });
+
+        enrollmentForm.addEventListener("submit", function (event) {
+          var spamFields = ["expectations", "medicalNotes", "supportNeeds", "referralName"];
+
+          if (phoneInput && !isValidLocalMobile(phoneInput.value)) {
+            phoneInput.setCustomValidity("Invalid number");
+            phoneInput.reportValidity();
+            event.preventDefault();
+            return;
+          }
+
+          for (var index = 0; index < spamFields.length; index += 1) {
+            var input = document.getElementById(spamFields[index]);
+
+            if (input && hasSpamContent(input.value)) {
+              input.setCustomValidity("Unable to submit. Please contact us directly.");
+              input.reportValidity();
+              event.preventDefault();
+              return;
+            }
+
+            if (input) {
+              input.setCustomValidity("");
+            }
+          }
         });
       }
 
