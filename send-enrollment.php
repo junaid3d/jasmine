@@ -17,7 +17,13 @@ function clean_email($value) {
 }
 
 function normalize_phone($value) {
-    return preg_replace('/[\s\-\(\)\.]/', '', (string) $value);
+    $value = preg_replace('/[\s\-\(\)\.]/', '', (string) $value);
+
+    if (preg_match('/^\+923\d{9}$/', $value) === 1) {
+        return '0' . substr($value, 3);
+    }
+
+    return $value;
 }
 
 function is_valid_local_mobile($value) {
