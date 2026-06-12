@@ -2,5 +2,6 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/navephnl/jasminelearning.com/
-    - /bin/rm -rf $DEPLOYPATH/*
+    - /bin/find $DEPLOYPATH -mindepth 1 ! -name 'zoho-config.php' -exec /bin/rm -rf {} +
     - /bin/cp -R * $DEPLOYPATH
+    - /bin/cp .htaccess $DEPLOYPATH/.htaccess

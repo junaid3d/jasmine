@@ -85,6 +85,162 @@ function has_spam_content($value) {
     return false;
 }
 
+function split_full_name($name) {
+    $parts = preg_split('/\s+/', trim((string) $name));
+
+    if (!$parts || count($parts) === 0 || $parts[0] === '') {
+        return array('', 'Unknown');
+    }
+
+    if (count($parts) === 1) {
+        return array('', $parts[0]);
+    }
+
+    $last_name = array_pop($parts);
+    return array(implode(' ', $parts), $last_name);
+}
+
+function http_post_form($url, $body) {
+    $payload = http_build_query($body);
+
+    if (function_exists('curl_init')) {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+        curl_setopt($ch, CURLOPT_TIMEOUT, 12);
+        $response = curl_exec($ch);
+        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $error = curl_error($ch);
+        curl_close($ch);
+
+        return array($status, $response, $error);
+    }
+
+    $context = stream_context_create(array(
+        'http' => array(
+            'method' => 'POST',
+            'header' => "Content-Type: application/x-www-form-urlencoded\r\n",
+            'content' => $payload,
+            'timeout' => 12
+        )
+    ));
+    $response = @file_get_contents($url, false, $context);
+    $status = 0;
+
+    if (isset($http_response_header[0]) && preg_match('/\s(\d{3})\s/', $http_response_header[0], $matches)) {
+        $status = (int) $matches[1];
+    }
+
+    return array($status, $response, $response === false ? 'HTTP request failed' : '');
+}
+
+function http_post_json($url, $body, $headers) {
+    $payload = json_encode($body);
+    $request_headers = array_merge(array('Content-Type: application/json'), $headers);
+
+    if (function_exists('curl_init')) {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $request_headers);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 12);
+        $response = curl_exec($ch);
+        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $error = curl_error($ch);
+        curl_close($ch);
+
+        return array($status, $response, $error);
+    }
+
+    $context = stream_context_create(array(
+        'http' => array(
+            'method' => 'POST',
+            'header' => implode("\r\n", $request_headers) . "\r\n",
+            'content' => $payload,
+            'timeout' => 12
+        )
+    ));
+    $response = @file_get_contents($url, false, $context);
+    $status = 0;
+
+    if (isset($http_response_header[0]) && preg_match('/\s(\d{3})\s/', $http_response_header[0], $matches)) {
+        $status = (int) $matches[1];
+    }
+
+    return array($status, $response, $response === false ? 'HTTP request failed' : '');
+}
+
+function load_zoho_config() {
+    $path = __DIR__ . '/zoho-config.php';
+
+    if (!is_readable($path)) {
+        return null;
+    }
+
+    $config = include $path;
+    $required = array('client_id', 'client_secret', 'refresh_token', 'accounts_domain', 'api_domain');
+
+    foreach ($required as $key) {
+        if (!isset($config[$key]) || trim((string) $config[$key]) === '') {
+            return null;
+        }
+    }
+
+    return $config;
+}
+
+function get_zoho_access_token($config) {
+    list($status, $response, $error) = http_post_form(rtrim($config['accounts_domain'], '/') . '/oauth/v2/token', array(
+        'refresh_token' => $config['refresh_token'],
+        'client_id' => $config['client_id'],
+        'client_secret' => $config['client_secret'],
+        'grant_type' => 'refresh_token'
+    ));
+
+    $data = json_decode((string) $response, true);
+
+    if ($status < 200 || $status >= 300 || !isset($data['access_token'])) {
+        error_log('Zoho token refresh failed. HTTP ' . $status . ' ' . $error . ' ' . substr((string) $response, 0, 500));
+        return null;
+    }
+
+    return $data['access_token'];
+}
+
+function create_zoho_lead($lead_data) {
+    $config = load_zoho_config();
+
+    if ($config === null) {
+        error_log('Zoho config missing or incomplete.');
+        return false;
+    }
+
+    $access_token = get_zoho_access_token($config);
+
+    if ($access_token === null) {
+        return false;
+    }
+
+    list($status, $response, $error) = http_post_json(rtrim($config['api_domain'], '/') . '/crm/v8/Leads', array(
+        'data' => array($lead_data)
+    ), array(
+        'Authorization: Zoho-oauthtoken ' . $access_token
+    ));
+
+    $data = json_decode((string) $response, true);
+    $code = isset($data['data'][0]['code']) ? $data['data'][0]['code'] : '';
+
+    if ($status < 200 || $status >= 300 || $code !== 'SUCCESS') {
+        error_log('Zoho lead creation failed. HTTP ' . $status . ' ' . $error . ' ' . substr((string) $response, 0, 500));
+        return false;
+    }
+
+    return true;
+}
+
 function render_page($title, $message, $is_success = true) {
     $accent = $is_success ? '#73805f' : '#a05d4b';
     echo '<!DOCTYPE html>';
@@ -157,6 +313,27 @@ $allowed_familiarity = array('Yes', 'No', 'A little');
 if (!in_array(htmlspecialchars_decode($constructivist, ENT_QUOTES), $allowed_familiarity, true)) {
     $constructivist = 'Not provided';
 }
+
+list($parent_first_name, $parent_last_name) = split_full_name(htmlspecialchars_decode($parent_name, ENT_QUOTES));
+$zoho_lead = array(
+    'Company' => 'Jasmine Learning Family',
+    'First_Name' => $parent_first_name,
+    'Last_Name' => $parent_last_name,
+    'Email' => $email,
+    'Phone' => htmlspecialchars_decode($phone_number, ENT_QUOTES),
+    'Child_Name' => htmlspecialchars_decode($child_name, ENT_QUOTES),
+    'Child_Age' => (int) htmlspecialchars_decode($child_age, ENT_QUOTES),
+    'Constructivist_Familiarity' => htmlspecialchars_decode($constructivist, ENT_QUOTES),
+    'Learning_Expectations' => htmlspecialchars_decode($expectations, ENT_QUOTES),
+    'Medical_Notes' => htmlspecialchars_decode($medical_notes, ENT_QUOTES),
+    'Support_Needs' => htmlspecialchars_decode($support_needs, ENT_QUOTES),
+    'Referral_Name' => htmlspecialchars_decode($referral_name, ENT_QUOTES),
+    'Referral_Contact' => htmlspecialchars_decode($referral_contact, ENT_QUOTES),
+    'Community_Disclaimer_Accepted' => true,
+    'Description' => "Submitted from jasminelearning.com\nSource: Website enrollment form"
+);
+
+create_zoho_lead($zoho_lead);
 
 $body_lines = array(
     'New Jasmine Learning Enrollment',

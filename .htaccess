@@ -1,0 +1,3 @@
+<Files "zoho-config.php">
+    Require all denied
+</Files>
