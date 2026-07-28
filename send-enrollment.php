@@ -278,6 +278,7 @@ $child_name = clean_text(isset($_POST['child_name']) ? $_POST['child_name'] : ''
 $child_age = clean_text(isset($_POST['child_age']) ? $_POST['child_age'] : '');
 $phone_number = clean_text(isset($_POST['phone']) ? $_POST['phone'] : '');
 $email = clean_email(isset($_POST['email']) ? $_POST['email'] : '');
+$learning_plan = clean_text(isset($_POST['learning_plan']) ? $_POST['learning_plan'] : '');
 $constructivist = clean_text(isset($_POST['constructivist_familiarity']) ? $_POST['constructivist_familiarity'] : '');
 $expectations = clean_text(isset($_POST['expectations']) ? $_POST['expectations'] : '');
 $medical_notes = clean_text(isset($_POST['medical_notes']) ? $_POST['medical_notes'] : '');
@@ -286,8 +287,13 @@ $referral_name = clean_text(isset($_POST['referral_name']) ? $_POST['referral_na
 $referral_contact = clean_text(isset($_POST['referral_contact']) ? $_POST['referral_contact'] : '');
 $community_disclaimer = isset($_POST['community_disclaimer']) ? clean_text($_POST['community_disclaimer']) : '';
 
-if ($parent_name === '' || $child_name === '' || $child_age === '' || $phone_number === '' || $email === '' || $expectations === '' || $medical_notes === '' || $support_needs === '' || $referral_name === '' || $referral_contact === '' || $community_disclaimer !== 'accepted') {
+if ($parent_name === '' || $child_name === '' || $child_age === '' || $phone_number === '' || $email === '' || $learning_plan === '' || $expectations === '' || $medical_notes === '' || $support_needs === '' || $referral_name === '' || $referral_contact === '' || $community_disclaimer !== 'accepted') {
     render_page('Missing Details', 'Please complete the required enrollment details and try again.', false);
+    exit;
+}
+
+if (!ctype_digit(htmlspecialchars_decode($child_age, ENT_QUOTES)) || (int) htmlspecialchars_decode($child_age, ENT_QUOTES) < 4 || (int) htmlspecialchars_decode($child_age, ENT_QUOTES) > 12) {
+    render_page('Invalid Age', 'Enrollment is available for children ages 4 to 12.', false);
     exit;
 }
 
@@ -314,6 +320,12 @@ if (!in_array(htmlspecialchars_decode($constructivist, ENT_QUOTES), $allowed_fam
     $constructivist = 'Not provided';
 }
 
+$allowed_learning_plans = array('Elementary Hive Studio', 'Montessori Blend', 'PBL', 'HIL');
+if (!in_array(htmlspecialchars_decode($learning_plan, ENT_QUOTES), $allowed_learning_plans, true)) {
+    render_page('Invalid Learning Plan', 'Please select one of the available learning plans and try again.', false);
+    exit;
+}
+
 list($parent_first_name, $parent_last_name) = split_full_name(htmlspecialchars_decode($parent_name, ENT_QUOTES));
 $zoho_lead = array(
     'Company' => 'Jasmine Learning Family',
@@ -330,7 +342,7 @@ $zoho_lead = array(
     'Referral_Name' => htmlspecialchars_decode($referral_name, ENT_QUOTES),
     'Referral_Contact' => htmlspecialchars_decode($referral_contact, ENT_QUOTES),
     'Community_Disclaimer_Accepted' => true,
-    'Description' => "Submitted from jasminelearning.com\nSource: Website enrollment form"
+    'Description' => "Submitted from jasminelearning.com\nSource: Website enrollment form\nLearning Plan: " . htmlspecialchars_decode($learning_plan, ENT_QUOTES)
 );
 
 create_zoho_lead($zoho_lead);
@@ -343,6 +355,7 @@ $body_lines = array(
     'Child Age: ' . htmlspecialchars_decode($child_age, ENT_QUOTES),
     'Phone Number: ' . htmlspecialchars_decode($phone_number, ENT_QUOTES),
     'Email Address: ' . $email,
+    'Learning Plan: ' . htmlspecialchars_decode($learning_plan, ENT_QUOTES),
     'Familiar with constructivist education: ' . htmlspecialchars_decode($constructivist, ENT_QUOTES),
     '',
     'Expectations:',
