@@ -149,9 +149,7 @@ Please complete the enrollment form and select one of these learning plans:
 - C) PBL
 - D) HIL
 
-Once payment is received and verified, your child's seat will be confirmed.
-
-**Refund policy:** 50% of the fee is refundable if your child withdraws after attending 2 classes.
+Please fill out the enrollment form and click submit to request an enrollment for your child.
 
 ---
 

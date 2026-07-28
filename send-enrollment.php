@@ -310,7 +310,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 $spam_check_values = array($parent_name, $child_name, $expectations, $medical_notes, $support_needs, $referral_name, $referral_contact);
 foreach ($spam_check_values as $spam_check_value) {
     if (has_spam_content(htmlspecialchars_decode($spam_check_value, ENT_QUOTES))) {
-        render_page('Thank you.', 'Your enrollment request has been received. Bank transfer details will be shared with you shortly.', true);
+        render_page('Thank you.', 'Your enrollment request has been received. We will contact you shortly.', true);
         exit;
     }
 }
@@ -393,7 +393,7 @@ $headers = array(
 $sent = mail($recipient, $subject, $body, implode("\r\n", $headers), '-f' . $site_email);
 
 if ($sent) {
-    render_page('Thank you.', 'Your enrollment request has been received. Bank transfer details will be shared with you shortly.', true);
+    render_page('Thank you.', 'Your enrollment request has been received. We will contact you shortly.', true);
 } else {
     render_page('We could not send your request.', 'Sorry, your enrollment request could not be sent right now. Please contact ' . $phone . ' and we will help you directly.', false);
 }
