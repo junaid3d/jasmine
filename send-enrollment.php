@@ -333,6 +333,7 @@ $zoho_lead = array(
     'Last_Name' => $parent_last_name,
     'Email' => $email,
     'Phone' => htmlspecialchars_decode($phone_number, ENT_QUOTES),
+    'Skype_ID' => htmlspecialchars_decode($learning_plan, ENT_QUOTES),
     'Child_Name' => htmlspecialchars_decode($child_name, ENT_QUOTES),
     'Child_Age' => (int) htmlspecialchars_decode($child_age, ENT_QUOTES),
     'Constructivist_Familiarity' => htmlspecialchars_decode($constructivist, ENT_QUOTES),
