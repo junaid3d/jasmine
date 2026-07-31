@@ -50,13 +50,18 @@ Children collaborate, share ideas, support one another, and become part of a kin
 
 **5 hours on site**
 
-A mixed-age studio using different constructivist learning approaches.
+A mixed aged studio practicing different constructivist learning approaches.
 
 ## Plan B: Elementary Hive Studio
 
 **Ages 8 to 12**
 
-A mixed-age studio for independent learners.
+**5 hours on site**
+
+- A mixed aged studio of independent learners.
+- Organic community based learning
+- Focus on critical thinking skills.
+- Hands on project based learning.
 
 ## Plan C: PBL · Project-Based Learning
 
